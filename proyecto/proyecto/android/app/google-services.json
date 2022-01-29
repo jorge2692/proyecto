@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "895511986897",
+    "project_id": "tesis-app-2692",
+    "storage_bucket": "tesis-app-2692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895511986897:android:3b64b8583d825dd8c77bf0",
+        "android_client_info": {
+          "package_name": "com.example.proyecto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895511986897-mrqrcs452l7niro9fm2ejoebh1gmppad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.proyecto",
+            "certificate_hash": "ed20ab5ba588ad58e39031a6ff0e9368944fbd06"
+          }
+        },
+        {
+          "client_id": "895511986897-hoj6ulvjaofs61dciba0m9gp4ahckc4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCewd9YuyPEJ0WlOnU4_EImBlRhXpZI-h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895511986897-hoj6ulvjaofs61dciba0m9gp4ahckc4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

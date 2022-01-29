@@ -6,20 +6,19 @@ String categoryToJson(Category data) => json.encode(data.toJson());
 
 class Category {
 
-  String? id;
-  String? name;
-  String? description;
-  List<Category> toList = [];
-
-
   Category({
     this.id,
     this.name,
     this.description,
   });
 
+  String? id;
+  String? name;
+  String? description;
+  List<Category> toList = [];
+
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    id: json["id"],
+    id: json["id"] is int ? json["id"].toString() : json['id'],
     name: json["name"],
     description: json["description"],
   );

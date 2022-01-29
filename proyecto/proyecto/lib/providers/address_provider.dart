@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyecto/src/api/environment.dart';
-import 'package:proyecto/src/models/edificio.dart';
+import 'package:proyecto/src/models/address.dart';
 import 'package:proyecto/src/models/response_api.dart';
 import 'package:proyecto/src/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:proyecto/src/utils/shared_pref.dart';
 
-class EdificiosProvider {
+class AddressProvider {
 
   String _url = Environment.API_TESIS;
-  String _api = '/api/edificios';
+  String _api = '/api/address';
 
   BuildContext? context;
   User? sessionUser;
@@ -22,7 +22,7 @@ class EdificiosProvider {
     this.sessionUser = sessionUser;
   }
 
-  Future<List<Edificio>> getAll() async{
+  Future<List<Address>> getAll() async{
     try {
 
       Uri url = Uri.http(_url, '$_api/getAll');
@@ -38,8 +38,8 @@ class EdificiosProvider {
       }
 
       final data = json.decode(res.body);
-      Edificio edificio = Edificio.fromJsonList(data);
-      return edificio.toList;
+      Address address = Address.fromJsonList(data);
+      return address.toList;
 
 
     }catch(e){
@@ -52,12 +52,12 @@ class EdificiosProvider {
   }
 
 
-  Future<ResponseApi?> create(Edificio edificio) async {
+  Future<ResponseApi?> create(Address address) async {
 
     try{
 
       Uri url = Uri.http(_url, '$_api/create');
-      String bodyParams = json.encode(edificio);
+      String bodyParams = json.encode(address);
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!

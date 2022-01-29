@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/models/category.dart';
+import 'package:proyecto/src/models/address.dart';
 import 'package:proyecto/src/pages/administrator/create/equipos/equipos_create_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 
@@ -39,33 +40,34 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
       body: ListView(
           children: [
             SizedBox(height: 25),
-            _textFieldEquipo(_con),
-            _textFieldDescripcion(_con),
-            _textFieldSerial(_con),
-            _textFieldModel(_con),
-            _textFieldId_Lavanti(_con),
-            _textFieldvoltaje(_con),
-            _textFieldCorriente(_con),
-            _textFieldPotencia(_con),
+            _textFieldEquipo(),
+            _textFieldDescripcion(),
+            _textFieldSerial(),
+            _textFieldModel(),
+            _textFieldId_Lavanti(),
+            _textFieldvoltaje(),
+            _textFieldCorriente(),
+            _textFieldPotencia(),
             Container(
               height: 150,
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _CardImage(null, 1),
-                  _CardImage(null, 2)
+                  _CardImage(_con.imageFile1, 1),
+                  _CardImage(_con.imageFile2, 2)
 
                 ],
               ),
             ),
 
             _dropDownCategories(_con.categories, _con),
+            _dropDownEdificios(_con.address, _con)
 
           ],
 
       ),
-      bottomNavigationBar: _buttonCreate(_con),
+      bottomNavigationBar: _buttonCreate(),
     );
   }
 
@@ -119,7 +121,9 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
                   value: _con.idCategory,
                   onChanged: (option) {
                     setState((){
+                      print('Categoria seleccionada: $option');
                       _con.idCategory = option;
+
                     });
                   },
                 ),
@@ -132,6 +136,74 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
+
+  Widget _dropDownEdificios (List  <Address> address, _con ){
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Material(
+        elevation: 2.0,
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.search_outlined,
+                    color: MyColors.primaryColor,
+                  ),
+                  SizedBox(width: 15),
+                  Text(
+                    'Edificios',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: DropdownButton(
+                  underline: Container(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: MyColors.primaryColor,
+                    ),
+                  ),
+                  elevation: 3,
+                  isExpanded: true,
+                  hint: Text(
+                    'Seleccionar Edificio',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
+                  ),
+                  items: _dropDownIItems(address),
+                  value: _con.idAddress,
+                  onChanged: (option) {
+                    setState((){
+                      print('Edificio seleccionada: $option');
+                      _con.idAddress = option;
+
+                    });
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
+
+      ),
+    );
+  }
+
+
+
   List<DropdownMenuItem<String>> _dropDownItems(List<Category> categories){
     List<DropdownMenuItem<String>> list = [];
     categories.forEach((category) {
@@ -143,36 +215,53 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     return list;
   }
 
+  List<DropdownMenuItem<String>> _dropDownIItems(List<Address> address){
+    List<DropdownMenuItem<String>> list = [];
+    address.forEach((address) {
+      list.add(DropdownMenuItem(
+        child: Text(address.name!),
+        value: address.id,
+      ));
+    });
+    return list;
+  }
+
+
   Widget _CardImage (File? imageFile, int numberFile){
     // BuildContext context;
-    return imageFile != null ?
-    Card(
-      elevation: 3.0,
-      child: Container(
-        height: 140,
-        // width: MediaQuery.of(context).size.width/3,
-        width: 10,
-        child: Image.file(
-          imageFile,
-          fit: BoxFit.cover,
-        ),
-      ),
-    )
-    : Card(
-      elevation: 3.0,
+    return GestureDetector(
+      onTap: (){
+        _con.showAlertDialog(numberFile);
+      },
+      child: imageFile != null ?
+      Card(
+        elevation: 3.0,
         child: Container(
           height: 140,
           // width: MediaQuery.of(context).size.width/3,
           width: 150,
-          child: Image(
-            image:AssetImage('assets/logo-lavanti.png'),
+          child: Image.file(
+            imageFile,
             fit: BoxFit.cover,
+          ),
+        ),
+      )
+      : Card(
+        elevation: 3.0,
+          child: Container(
+            height: 140,
+            // width: MediaQuery.of(context).size.width/3,
+            width: 150,
+            child: Image(
+              image:AssetImage('assets/logo-lavanti.png'),
+              fit: BoxFit.cover,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buttonCreate(_con) {
+  Widget _buttonCreate() {
     return Container(
       height: 50,
       width: double.infinity,
@@ -192,7 +281,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
 
   }
 
-  Widget _textFieldEquipo(_con) {
+  Widget _textFieldEquipo() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -219,7 +308,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
-  Widget _textFieldDescripcion(_con) {
+  Widget _textFieldDescripcion() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       padding: EdgeInsets.all(5),
@@ -245,7 +334,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
       ),
     );
   }
-  Widget _textFieldSerial(_con) {
+  Widget _textFieldSerial() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -254,7 +343,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.serialController ,
         maxLines: 1,
         maxLength: 30,
         decoration: InputDecoration(
@@ -272,7 +361,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
-  Widget _textFieldModel(_con) {
+  Widget _textFieldModel() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -281,7 +370,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.modelController ,
         maxLines: 1,
         maxLength: 30,
         decoration: InputDecoration(
@@ -299,7 +388,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
-  Widget _textFieldId_Lavanti(_con) {
+  Widget _textFieldId_Lavanti() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -308,7 +397,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.id_lavanti ,
         maxLines: 1,
         maxLength: 30,
         decoration: InputDecoration(
@@ -326,7 +415,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
-  Widget _textFieldvoltaje(_con) {
+  Widget _textFieldvoltaje() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -335,7 +424,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.voltajeController ,
         keyboardType: TextInputType.number,
         maxLines: 1,
         maxLength: 30,
@@ -354,7 +443,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
     );
   }
 
-  Widget _textFieldCorriente(_con) {
+  Widget _textFieldCorriente() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -363,7 +452,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.corrienteController ,
         keyboardType: TextInputType.phone,
         maxLines: 1,
         maxLength: 30,
@@ -381,7 +470,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
       ),
     );
   }
-  Widget _textFieldPotencia(_con) {
+  Widget _textFieldPotencia() {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -390,7 +479,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.nameController ,
+        controller:_con.potenciaController ,
         keyboardType: TextInputType.number,
         maxLines: 1,
         maxLength: 30,

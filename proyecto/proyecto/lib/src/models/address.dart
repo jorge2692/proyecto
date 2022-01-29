@@ -1,43 +1,61 @@
 // To parse this JSON data, do
 //
-//     final edificio = edificioFromJson(jsonString);
+//     final address = addressFromJson(jsonString);
 
 import 'dart:convert';
 
-Edificio edificioFromJson(String str) => Edificio.fromJson(json.decode(str));
+Address addressFromJson(String str) => Address.fromJson(json.decode(str));
 
-String edificioToJson(Edificio data) => json.encode(data.toJson());
+String addressToJson(Address data) => json.encode(data.toJson());
 
-class Edificio {
-  Edificio({
+class Address {
+  Address({
     this.id,
+    this.idCity,
     this.name,
-    this.description,
+    this.address,
+    this.neighborhood,
+    this.lat,
+    this.lng,
   });
 
   String? id;
+  int? idCity;
   String? name;
-  String? description;
-  List<Edificio> toList = [];
+  String? address;
+  String? neighborhood;
+  double? lat;
+  double? lng;
+  List<Address> toList = [];
 
 
-  factory Edificio.fromJson(Map<String, dynamic> json) => Edificio(
-    id: json["id"],
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
+    id: json["id"] is int ? json['id'].toString() : json['id'],
+    idCity: json["id_city"],
     name: json["name"],
-    description: json["description"],
+    address: json["address"],
+    neighborhood: json["neighborhood"],
+    lat: json["lat"] is String ? double.parse(json["lat"]): json["lat"],
+    lng: json["lng"] is String ? double.parse(json["lng"]): json["lng"],
+
   );
 
-  Edificio.fromJsonList(List<dynamic> jsonList){
+  Address.fromJsonList(List<dynamic> jsonList){
     if(jsonList == null) return;
     jsonList.forEach((item) {
-      Edificio edificio = Edificio.fromJson(item);
-      toList.add(edificio);
+      Address address = Address.fromJson(item);
+      toList.add(address);
     });
   }
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "id_city": idCity,
     "name": name,
-    "description": description,
+    "address": address,
+    "neighborhood": neighborhood,
+    "lat": lat,
+    "lng": lng,
+    //"city": city,
   };
 }

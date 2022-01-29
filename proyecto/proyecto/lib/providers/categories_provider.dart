@@ -38,6 +38,7 @@ class CategoriesProvider {
       }
 
       final data = json.decode(res.body);
+      print(data);
       Category category = Category.fromJsonList(data);
       return category.toList;
 

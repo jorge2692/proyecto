@@ -75,7 +75,7 @@ Widget _textFieldCategoria(_con) {
         borderRadius: BorderRadius.circular(30)
     ),
     child: TextField(
-      controller:_con.nameController ,
+      controller:_con.idEspController ,
       decoration: InputDecoration(
         hintText: 'Nombre de la Categoria',
         hintStyle: TextStyle(

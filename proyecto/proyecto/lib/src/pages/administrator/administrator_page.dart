@@ -85,7 +85,7 @@ Widget _drawer(_con) {
         ListTile(
           onTap: _con.goToCategoriaCreate,
           title: Text('Crear Categoria'),
-          trailing: Icon(Icons.add_business),
+          trailing: Icon(Icons.account_tree_rounded),
         ),
         ListTile(
           onTap: _con.goToEdificioCreate,
@@ -93,9 +93,19 @@ Widget _drawer(_con) {
           trailing: Icon(Icons.add_business),
         ),
         ListTile(
+          onTap: _con.goToCityCreate,
+          title: Text('Crear Ciudad'),
+          trailing: Icon(Icons.add_location_outlined ),
+        ),
+        ListTile(
           onTap: _con.goToEquiposCreate,
           title: Text('Crear Equipo'),
           trailing: Icon(Icons.local_laundry_service_outlined),
+        ),
+        ListTile(
+          onTap: _con.goToEspCreate,
+          title: Text('Crear Modulo Esp'),
+          trailing: Icon(Icons.account_tree_rounded),
         ),
         ListTile(
           onTap: _con.goToRoles,

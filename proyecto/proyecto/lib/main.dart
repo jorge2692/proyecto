@@ -6,6 +6,8 @@ import 'package:proyecto/src/pages/administrator/create/edificios/edificios_crea
 import 'package:proyecto/src/pages/administrator/create/equipos/equipos_create_page.dart';
 import 'package:proyecto/src/pages/administrator/create/esp8266/esp_create_page.dart';
 import 'package:proyecto/src/pages/administrator/create/map/edificios_map_page.dart';
+import 'package:proyecto/src/pages/administrator/search/equipos_search_controller.dart';
+import 'package:proyecto/src/pages/administrator/search/equipos_search_page.dart';
 import 'package:proyecto/src/pages/client/update/update_page.dart';
 import 'package:proyecto/src/pages/esp8266/update/esp_update_page.dart';
 import 'package:proyecto/src/pages/login/login_page.dart';
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
         'CityCreatePage': ( _ ) => CityCreatePage(),
         'EspCreatePage': ( _ ) => EspCreatePage(),
         'EspUpdatePage': ( _ ) => EspUpdatePage(),
+        'EquiposSearchPage': ( _ ) => EquiposSearchPage(),
       },
       theme: ThemeData(
           primaryColor: MyColors.primaryColor,

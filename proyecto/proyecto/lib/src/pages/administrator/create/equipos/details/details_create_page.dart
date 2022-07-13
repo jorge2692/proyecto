@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:proyecto/src/models/equipos.dart';
+import 'package:proyecto/src/models/esp8266.dart';
 import 'package:proyecto/src/pages/administrator/create/equipos/details/details_create_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 
@@ -15,7 +16,7 @@ class EquiposDetailsPage extends StatefulWidget {
 }
 
 class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
-
+  bool prueba = false;
   EquiposDetailsController _con = new EquiposDetailsController();
 
 
@@ -31,18 +32,30 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height *0.9,
-      child: Column(
-        children: [
-          _imageSlideshow(),
-          _textName(),
-          _textDescription(),
-          Spacer(),
-          _buttonEncendido()
-        ],
-      ),
+    return FutureBuilder(builder: (context, AsyncSnapshot<Esp8266?> snapshot){
+      if(snapshot.connectionState==ConnectionState.waiting){
+
+        return CircularProgressIndicator();
+
+      }
+      return Container(
+        height: MediaQuery.of(context).size.height *0.9,
+        child: Column(
+          children: [
+            _imageSlideshow(),
+            _textName(),
+            _textDescription(),
+            Spacer(),
+            _buttonEncendido(snapshot.data)
+          ],
+        ),
+      );
+
+    },
+    future: _con.getEspByMachine(widget.equipos!.id!),
     );
+
+
   }
 
   Widget _textName(){
@@ -61,14 +74,14 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
 
   }
 
-  Widget _buttonEncendido(){
+  Widget _buttonEncendido(Esp8266? data){
 
     return Container(
-      margin: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
+      margin: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 30),
       child: ElevatedButton(
-        onPressed: _con.suma,
-        style: ElevatedButton.styleFrom(primary: MyColors.primaryColor,
-          padding: EdgeInsets.symmetric(vertical: 5),
+        onPressed: () => data == null ? null : suma(data),
+        style: ElevatedButton.styleFrom(primary: data== null ? Colors.grey :( (data.gpio0 ?? false)? MyColors.primaryColor: Colors.red),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)
           )
@@ -135,7 +148,7 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
           indicatorBackgroundColor: Colors.grey,
           children: [
             Container(
-              child: _con.equipos!.image1 == null ?  _notImg() :
+              child: _con.equipos?.image1! == null ?  _notImg() :
               FadeInImage(
                   image:NetworkImage(_con.equipos!.image1!),
                   fit: BoxFit.cover,
@@ -145,7 +158,7 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
             ),
 
             Container(
-              child: _con.equipos!.image2 == null ?  _notImg() :
+              child: _con.equipos?.image2! == null ?  _notImg() :
               FadeInImage(
                 image:NetworkImage(_con.equipos!.image2!),
                 fit: BoxFit.cover,
@@ -155,9 +168,7 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
             ),
           ],
 
-          onPageChanged: (value) {
-            print('Page changed: $value');
-          },
+          onPageChanged: (value) =>  print('Page changed: $value'),
 
           autoPlayInterval: 10000,
           isLoop: true,
@@ -183,6 +194,10 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
     );
   }
 
+  void suma(Esp8266? esp8266)async{
+    await _con.updateMachineStatus(esp8266);
+    refresh();
+  }
 
 
   void refresh(){

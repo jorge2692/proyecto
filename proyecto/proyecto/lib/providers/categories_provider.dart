@@ -44,7 +44,7 @@ class CategoriesProvider {
 
 
     }catch(e){
-      print('Error: $e');
+      print('Error CategoriesProvider: $e');
       return[];
 
     }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart';
+import 'package:intl/intl.dart';
 
 
 import 'package:flutter/cupertino.dart';
@@ -26,79 +27,112 @@ class Esp8266Provider {
   }
 
 
-  // Future<List<Esp8266>> getByCategory(String idCategory) async{
-  //   try {
-  //
-  //     Uri url = Uri.http(_url, '$_api/findByCategory/$idCategory');
-  //     Map<String, String> headers = {
-  //       'Content-type': 'application/json',
-  //       'Authorization': sessionUser!.sessionToken!
-  //     };
-  //     final res = await http.get(url, headers: headers);
-  //
-  //     if (res.statusCode == 401){
-  //       Fluttertoast.showToast(msg: 'Sesion Expirada');
-  //       new SharedPref().logout(context!, sessionUser!.id!);
-  //     }
-  //
-  //     final data = json.decode(res.body);
-  //     Esp8266 equipos = Esp8266.fromJsonList(data);
-  //     return equipos.toList;
-  //
-  //
-  //   }catch(e){
-  //     print('Error: $e');
-  //     return[];
-  //
-  //   }
-  //
-  //
-  // }
-
-  Future<Stream?> create(Esp8266 esp8266) async {
-    try{
-      Uri url = Uri.http(_url, '$_api/create');
-      final request = http.MultipartRequest('POST', url);
-      request.headers['Authorization'] = sessionUser!.sessionToken!;
-
-
-      request.fields['esp8266'] = json.encode(esp8266);
-      final response =  await request.send();
-      return response.stream.transform(utf8.decoder);
-
-    }catch(e){
-      print('Error: $e');
-      return null;
-    }
-  }
-  //
-  // Future<ResponseApi?> create(Esp8266 esp8266) async {
-  //
+  // Future<Stream?> create(Esp8266 esp8266) async {
   //   try{
-  //
   //     Uri url = Uri.http(_url, '$_api/create');
-  //     String bodyParams = json.encode(esp8266);
-  //     Map<String, String> headers = {
-  //       'Content-type': 'application/json',
-  //       'Authorization': sessionUser!.sessionToken!
-  //     };
+  //     final request = http.MultipartRequest('POST', url);
+  //     request.headers['Authorization'] = sessionUser!.sessionToken!;
+  //
   //     final res = await http.post(url, headers: headers, body: bodyParams);
   //
-  //     if (res.statusCode == 401){
-  //       Fluttertoast.showToast(msg: 'Sesion Expirada');
-  //       new SharedPref().logout(context!, sessionUser!.id!);
-  //     }
   //
-  //     final data = json.decode(res.body);
-  //     ResponseApi responseApi =  ResponseApi.fromJson(data);
-  //     return responseApi;
   //
-  //   }
-  //   catch(e){
+  //     request.fields['esp8266'] = json.encode(esp8266);
+  //     final response =  await request.send();
+  //     return response.stream.transform(utf8.decoder);
+  //
+  //   }catch(e){
   //     print('Error: $e');
   //     return null;
   //   }
   // }
+  //
+  Future<ResponseApi?> create(Esp8266 esp8266) async {
+
+    try{
+
+      Uri url = Uri.http(_url, '$_api/create');
+      String bodyParams = json.encode(esp8266);
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser!.sessionToken!
+      };
+      final res = await http.post(url, headers: headers, body: bodyParams);
+
+      if (res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context!, sessionUser!.id!);
+      }
+
+      final data = json.decode(res.body);
+      ResponseApi responseApi =  ResponseApi.fromJson(data);
+      return responseApi;
+
+    }
+    catch(e){
+      print('Error: $e');
+      return null;
+    }
+  }
+
+
+Future<Esp8266?> getByMachine(String idMachine) async{
+  try {
+
+    Uri url = Uri.http(_url, '$_api/findByMachine/$idMachine');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      // 'Authorization': sessionUser?.sessionToken??''
+    };
+    final res = await http.get(url, headers: headers);
+
+    // if (res.statusCode == 401){
+    //   Fluttertoast.showToast(msg: 'Sesion Expirada');
+    //   new SharedPref().logout(context!, sessionUser!.id!);
+    // }
+
+    final data = json.decode(res.body);
+    Esp8266 esp8266 = Esp8266.fromJson(data);
+    return esp8266;
+
+
+  }catch(e){
+    print('Error: $e');
+    return null;
+  }
+
+
+}
+
+  Future<ResponseApi?> update(Esp8266 esp8266) async {
+
+    try{
+      Uri url = Uri.http(_url, '$_api/update');
+      final DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now);
+      Map<String,dynamic> body = {
+          "id" : esp8266.idEsp,
+          "gpio0" : !(esp8266.gpio0 ?? false),
+          "updated_at" : formatted
+      };
+      Map<String, String> headers = {
+        'Content-type': 'application/json'
+      };
+
+      final res = await http.post(url, headers: headers, body: jsonEncode(body));
+
+      final data = json.decode(res.body);
+      ResponseApi responseApi =  ResponseApi.fromJson(data);
+      return responseApi;
+
+    }
+    catch(e){
+      print('Error update: $e');
+      return null;
+    }
+  }
+
 
 
 }

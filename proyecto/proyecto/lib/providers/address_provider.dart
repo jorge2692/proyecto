@@ -43,7 +43,7 @@ class AddressProvider {
 
 
     }catch(e){
-      print('Error: $e');
+      print('Error GetAll Address: $e');
       return[];
 
     }
@@ -79,4 +79,35 @@ class AddressProvider {
       return null;
     }
   }
+
+  Future<List<Address>> findByBuild(String idCiudad) async{
+    try {
+
+      Uri url = Uri.http(_url, '$_api/findByCity/$idCiudad');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser!.sessionToken!
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context!, sessionUser!.id!);
+      }
+
+      var data = json.decode(res.body);
+      Iterable i = data;
+      List<Address> direccion = i.map((e) => Address.fromJson(e)).toList();
+      return direccion;
+    }catch(e){
+      print('Error: $e');
+      return[];
+    }
+
+
+  }
+
+
+
+
 }

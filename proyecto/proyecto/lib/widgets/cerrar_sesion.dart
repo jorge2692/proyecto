@@ -89,4 +89,10 @@ class CerrarSesion{
     Navigator.pushNamed(context!, 'CityCreatePage');
   }
 
+  void goToEquiposSearch(){
+    Navigator.pushNamed(context!, 'EquiposSearchPage');
+  }
+
+
+
 }

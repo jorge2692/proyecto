@@ -164,7 +164,6 @@ class _HomeScreen extends State<HomeScreen> {
 
      }
 
-
   Widget _drawer(_con){
 
     print(_con.user?.image);
@@ -215,6 +214,7 @@ class _HomeScreen extends State<HomeScreen> {
             trailing: Icon(Icons.edit_attributes_outlined),
           ),
           ListTile(
+            onTap: _con.goToEquiposSearch,
             title: Text('Equipos'),
             trailing: Icon(Icons.local_laundry_service_outlined),
           ),

@@ -31,7 +31,7 @@ class Address {
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
     id: json["id"] is int ? json['id'].toString() : json['id'],
-    idCity: json["id_city"],
+    idCity: json["id_city"]is int ? json['id_city'] : int.parse(json['id_city']),
     name: json["name"],
     address: json["address"],
     neighborhood: json["neighborhood"],

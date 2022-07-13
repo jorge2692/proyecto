@@ -81,5 +81,33 @@ class EquiposProvider {
     }
   }
 
+  Future<List<Equipos>> getByBuilding(String idBuilding) async{
+    try {
+
+      Uri url = Uri.http(_url, '$_api/findByCategory/$idBuilding');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser!.sessionToken!
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401){
+        Fluttertoast.showToast(msg: 'Sesion Expirada');
+        new SharedPref().logout(context!, sessionUser!.id!);
+      }
+
+      var data = json.decode(res.body);
+      Iterable i = data;
+      List<Equipos> equipos = i.map((e) => Equipos.fromJson(e)).toList();
+      return equipos;
+    }catch(e){
+      print('Error: $e');
+      return[];
+    }
+
+
+  }
+
+
 
 }

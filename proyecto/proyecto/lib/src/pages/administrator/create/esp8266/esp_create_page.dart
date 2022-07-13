@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/models/category.dart';
 import 'package:proyecto/src/models/address.dart';
+import 'package:proyecto/src/models/city.dart';
+import 'package:proyecto/src/models/equipos.dart';
 import 'package:proyecto/src/pages/administrator/create/esp8266/esp_create_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 
@@ -18,6 +20,9 @@ class EspCreatePage extends StatefulWidget {
 
 class _EspCreatePageState extends State<EspCreatePage> {
   EspCreateController _con = new EspCreateController();
+
+  List<Address> address = [];
+
 
 
 
@@ -44,8 +49,10 @@ class _EspCreatePageState extends State<EspCreatePage> {
           _textFieldSsid(),
           _textFieldPassword(),
 
-          _dropDownCategories(_con.categories, _con),
-          _dropDownEdificios(_con.address, _con)
+          _dropDownCities(_con.cities,_con),
+          _dropDownEdificios(_con.edificios, _con),
+          _dropDownEquipos(_con.equipos, _con),
+
 
         ],
 
@@ -54,7 +61,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
     );
   }
 
-  Widget _dropDownCategories (List  <Category> categories, _con ){
+  Widget _dropDownEquipos (  List<Equipos> equipos, EspCreateController _con ){
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: Material(
@@ -73,7 +80,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   ),
                   SizedBox(width: 15),
                   Text(
-                    'Categorias',
+                    'Equipos',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -94,18 +101,18 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   elevation: 3,
                   isExpanded: true,
                   hint: Text(
-                    'Seleccionar Categoria',
+                    'Seleccionar Equipo',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
                     ),
                   ),
-                  items: _dropDownItems(categories),
-                  value: _con.idCategory,
+                  items: _dropDownItems(equipos),
+                  value: _con.idLavanti,
                   onChanged: (option) {
                     setState((){
-                      print('Categoria seleccionada: $option');
-                      _con.idCategory = option;
+                      print('Equipo seleccionado: $option');
+                      _con.idLavanti = option.toString();
 
                     });
                   },
@@ -120,7 +127,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
   }
 
 
-  Widget _dropDownEdificios (List  <Address> address, _con ){
+  Widget _dropDownEdificios (List  <Address> address, EspCreateController _con ){
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: Material(
@@ -171,7 +178,9 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   onChanged: (option) {
                     setState((){
                       print('Edificio seleccionada: $option');
-                      _con.idAddress = option;
+                      _con.getEquipos(option.toString());
+                      _con.idAddress = option.toString();
+                      _con.idLavanti = null;
 
                     });
                   },
@@ -185,14 +194,79 @@ class _EspCreatePageState extends State<EspCreatePage> {
     );
   }
 
+  Widget _dropDownCities(List<City> cities, EspCreateController _con ){
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Material(
+        elevation: 2.0,
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    color: MyColors.primaryColor,
+                  ),
+                  SizedBox(width: 15),
+                  Text(
+                    'Ciudades',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child : DropdownButton(
+                  underline: Container(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: MyColors.primaryColor,
+                    ),
+                  ),
+                  elevation: 3,
+                  isExpanded: true,
+                  hint: Text(
+                    'Selecionar Ciudad',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
+                  ),
+                  items:_dropDownCitie(cities),
+                  value: _con.idCity,
+                  onChanged: (option){
+                    setState(() {
+                      print('Ciudad seleccionada: $option');
+                      _con.getEdificios(option.toString());
+                      _con.idCity= option.toString();
+                      _con.idAddress = null;
+                      _con.idLavanti = null;
 
+                    });
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-  List<DropdownMenuItem<String>> _dropDownItems(List<Category> categories){
+  List<DropdownMenuItem<String>> _dropDownCitie(List<City> cities ){
     List<DropdownMenuItem<String>> list = [];
-    categories.forEach((category) {
+    cities.forEach((city) {
       list.add(DropdownMenuItem(
-        child: Text(category.name!),
-        value: category.id,
+        child: Text(city.name!),
+        value: city.id,
       ));
     });
     return list;
@@ -202,12 +276,27 @@ class _EspCreatePageState extends State<EspCreatePage> {
     List<DropdownMenuItem<String>> list = [];
     address.forEach((address) {
       list.add(DropdownMenuItem(
-        child: Text(address.name!),
+        child: Text(address.name??'address'),
         value: address.id,
       ));
     });
+    print(list);
     return list;
   }
+
+
+  List<DropdownMenuItem<String>> _dropDownItems(  List<Equipos> equipos){
+    List<DropdownMenuItem<String>> list = [];
+    equipos.forEach((equipos) {
+      list.add(DropdownMenuItem(
+        child: Text(equipos.name!),
+        value: equipos.id,
+      ));
+    });
+    print(list);
+    return list;
+  }
+
 
   Widget _buttonCreate() {
     return Container(

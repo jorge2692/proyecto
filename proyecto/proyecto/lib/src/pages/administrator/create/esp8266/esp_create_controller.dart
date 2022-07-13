@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:proyecto/providers/categories_provider.dart';
 import 'package:proyecto/providers/address_provider.dart';
+import 'package:proyecto/providers/cities_provider.dart';
+import 'package:proyecto/providers/equipos_provider.dart';
 import 'package:proyecto/providers/esp8266_provider.dart';
-import 'package:proyecto/src/models/category.dart';
 import 'package:proyecto/src/models/address.dart';
+import 'package:proyecto/src/models/city.dart';
+import 'package:proyecto/src/models/equipos.dart';
 import 'package:proyecto/src/models/esp8266.dart';
 import 'package:proyecto/src/models/response_api.dart';
 import 'package:proyecto/src/models/user.dart';
@@ -24,17 +25,23 @@ class EspCreateController {
 
   Function? refresh;
 
-  CategoriesProvider _categoriesProvider = new CategoriesProvider();
+  EquiposProvider _equiposProvider = new EquiposProvider();
   Esp8266Provider _esp8266Provider = new Esp8266Provider();
   AddressProvider _addressProvider = new AddressProvider();
+  CitiesProvider _citiesProvider = new CitiesProvider();
   User? user;
   SharedPref sharedPref= new SharedPref();
 
-  List<Category> categories = [];
+  List<Address> edificios = [];
   List<Address> address = [];
+  List<City> cities = [];
+  List<Equipos> equipos = [];
 
-  String? idCategory;
+
+
   String? idAddress;
+  String? idCity;
+  String? idLavanti;
 
 
   ProgressDialog? _progressDialog;
@@ -45,16 +52,28 @@ class EspCreateController {
     this.refresh = refresh;
     _progressDialog = new ProgressDialog(context: context);
     user = User.fromJson(await sharedPref.read('user'));
-    _categoriesProvider.init(context, user);
+
+    _equiposProvider.init(context, user);
     _addressProvider.init(context, user);
+    _citiesProvider.init(context, user);
     _esp8266Provider.init(context, user);
-    getCategories();
-    getAddress();
+    getCities();
 
   }
 
-  void getCategories() async {
-    categories = await _categoriesProvider.getAll();
+
+
+
+
+  void getEquipos(String idBuilding) async {
+    equipos = await _equiposProvider.getByBuilding(idBuilding);
+    refresh!();
+
+  }
+
+
+  void getEdificios(String idCiudad) async {
+    edificios = await _addressProvider.findByBuild(idCiudad);
     refresh!();
 
   }
@@ -63,6 +82,11 @@ class EspCreateController {
     address = await _addressProvider.getAll();
     refresh!();
 
+  }
+
+  void getCities()async{
+    cities = await _citiesProvider.getAll();
+    refresh!();
   }
 
   void createEsp8266() async {
@@ -77,7 +101,7 @@ class EspCreateController {
     }
     
 
-    if(idCategory == null){
+    if(idLavanti == null){
 
       MySnackbar.show(context!,'Seleccionar la categoria del producto');
       return;
@@ -98,28 +122,26 @@ class EspCreateController {
         idEsp: idesp,
         ssid: ssid,
         password: password,
+        idLavanti: int.parse(idLavanti??'0'),
 
-        idCategory: int.parse(idCategory!),
-        idAddress: int.parse(idAddress!)
+
+
     );
 
 
 
     _progressDialog!.show(max: 100, msg: 'Espere un momento');
-    Stream? stream = await _esp8266Provider.create(esp8266);
-    stream!.listen((res) {
-      _progressDialog!.close();
+    ResponseApi? responseApi = await _esp8266Provider.create(esp8266);
 
-      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      MySnackbar.show(context!, responseApi.message!);
+    MySnackbar.show(context!, responseApi?.message??'Response');
+    _progressDialog?.close();
 
-      if (responseApi.success!) {
+    if (responseApi?.success??false) {
 
-        resetValues();
+      resetValues();
 
-      }
+    }
 
-    });
 
     print('Formulario Equipos: ${esp8266.toJson()}');
 
@@ -133,8 +155,9 @@ class EspCreateController {
     passwordController.text = '';
 
 
-    idCategory = null;
     idAddress = null;
+    idLavanti = null;
+    idCity = null;
     refresh!();
 
   }

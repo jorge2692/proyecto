@@ -4,6 +4,8 @@ import 'package:proyecto/src/models/city.dart';
 import 'package:proyecto/src/models/equipos.dart';
 import 'package:proyecto/src/pages/administrator/search/equipos_search_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
+import 'package:proyecto/src/models/address.dart';
+
 
 class EquiposSearchPage extends StatefulWidget {
   @override
@@ -26,13 +28,33 @@ class _EquiposSearchPageState extends State<EquiposSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-          children:[
-          _dropDownCities(_con.cities,_con),
+        body: Column(
 
+          children: [_dropDownCities(_con.cities, _con),
+              Expanded (child: ListView.builder(
 
-      ]
-      )
+                itemCount:_con.edificios.length,
+                itemBuilder: (context, int index) {
+                  print("hello");
+
+                  return GestureDetector(
+                    onTap: () {
+                      _con.goToHistoryPage();
+                      setState(() {
+
+                        print("Gesture Detector");
+                      });
+                    },
+                    child: ListTile(
+                      title: Text('${_con.edificios[index].name}'),
+                    ),
+                  );
+                },
+
+                ),
+              ),
+          ],
+        ),
     );
   }
 
@@ -90,6 +112,7 @@ class _EquiposSearchPageState extends State<EquiposSearchPage> {
                     setState(() {
                       print('Ciudad seleccionada: $option');
                       _con.idCity= option.toString();
+                      _con.getEdificios(_con.idCity??'');
 
 
                     });
@@ -114,6 +137,42 @@ class _EquiposSearchPageState extends State<EquiposSearchPage> {
     return list;
   }
 
+
+
+
+  // Widget _CardEje (List <Address> address, EquiposSearchController _con){
+  //
+  //   return Center(
+  //     child: Card(
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: <Widget>[
+  //           const ListTile(
+  //             leading: Icon(Icons.album),
+  //             title: Text(address.name),
+  //             subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+  //           ),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.end,
+  //             children: <Widget>[
+  //               TextButton(
+  //                 child: const Text('BUY TICKETS'),
+  //                 onPressed: () {/* ... */},
+  //               ),
+  //               const SizedBox(width: 8),
+  //               TextButton(
+  //                 child: const Text('LISTEN'),
+  //                 onPressed: () {/* ... */},
+  //               ),
+  //               const SizedBox(width: 8),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  //
+  // }
 
   void refresh(){
     setState(() {

@@ -150,9 +150,9 @@ class _HomeScreen extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
+                      )
                     )
                   )
-        )
                 ],
               )
             ],

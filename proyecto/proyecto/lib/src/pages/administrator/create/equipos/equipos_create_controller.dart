@@ -80,7 +80,7 @@ class EquiposCreateController {
     String description = descriptionController.text;
     String serial = serialController.text;
     String model = modelController.text;
-    double idlavanti = double.parse(idLavanti.text);
+    double idLavantiValue = double.parse(idLavanti.text);
     double voltaje = double.parse(voltajeController.text);
     double corriente = double.parse(corrienteController.text);
     double potencia = double.parse(potenciaController.text);
@@ -116,7 +116,7 @@ class EquiposCreateController {
       description: description,
       serial: serial,
       model: model,
-      idlavanti: idlavanti,
+      idlavanti: idLavantiValue,
       voltaje: voltaje,
       corriente: corriente,
       potencia: potencia,

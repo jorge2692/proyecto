@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
         'EspCreatePage': ( _ ) => const EspCreatePage(),
         'EspUpdatePage': ( _ ) => const EspUpdatePage(),
         'EquiposSearchPage': ( _ ) => const EquiposSearchPage(),
-        'HistoryPage':( _ ) => HistoryPage(),
+        'HistoryPage':( _ ) => const HistoryPage(),
       },
       theme: ThemeData(
           primaryColor: MyColors.primaryColor,

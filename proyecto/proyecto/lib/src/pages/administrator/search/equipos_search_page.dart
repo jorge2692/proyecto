@@ -20,7 +20,6 @@ class _EquiposSearchPageState extends State<EquiposSearchPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);});

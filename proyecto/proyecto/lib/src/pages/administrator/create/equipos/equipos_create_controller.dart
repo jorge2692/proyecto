@@ -19,24 +19,24 @@ class EquiposCreateController {
 
   BuildContext? context;
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController descriptionController = new TextEditingController();
-  TextEditingController serialController = new TextEditingController();
-  TextEditingController modelController = new TextEditingController();
-  TextEditingController id_lavanti= new TextEditingController();
-  TextEditingController voltajeController= new TextEditingController();
-  TextEditingController corrienteController= new TextEditingController();
-  TextEditingController potenciaController= new TextEditingController();
+  TextEditingController nameController =  TextEditingController();
+  TextEditingController descriptionController =  TextEditingController();
+  TextEditingController serialController =  TextEditingController();
+  TextEditingController modelController =  TextEditingController();
+  TextEditingController idLavanti=  TextEditingController();
+  TextEditingController voltajeController=  TextEditingController();
+  TextEditingController corrienteController=  TextEditingController();
+  TextEditingController potenciaController=  TextEditingController();
   // TextEditingController id_address= new TextEditingController();
 
 
   Function? refresh;
 
-  CategoriesProvider _categoriesProvider = new CategoriesProvider();
-  EquiposProvider _equiposProvider = new EquiposProvider();
-  AddressProvider _addressProvider = new AddressProvider();
+  final CategoriesProvider _categoriesProvider =  CategoriesProvider();
+  final EquiposProvider _equiposProvider =  EquiposProvider();
+  final AddressProvider _addressProvider =  AddressProvider();
   User? user;
-  SharedPref sharedPref= new SharedPref();
+  SharedPref sharedPref =  SharedPref();
 
   List<Category> categories = [];
   List<Address> address = [];
@@ -53,7 +53,7 @@ class EquiposCreateController {
 
     this.context = context;
     this.refresh = refresh;
-    _progressDialog = new ProgressDialog(context: context);
+    _progressDialog = ProgressDialog(context: context);
     user = User.fromJson(await sharedPref.read('user'));
     _categoriesProvider.init(context, user);
     _addressProvider.init(context, user);
@@ -80,7 +80,7 @@ class EquiposCreateController {
     String description = descriptionController.text;
     String serial = serialController.text;
     String model = modelController.text;
-    double idlavanti = double.parse(id_lavanti.text);
+    double idlavanti = double.parse(idLavanti.text);
     double voltaje = double.parse(voltajeController.text);
     double corriente = double.parse(corrienteController.text);
     double potencia = double.parse(potenciaController.text);
@@ -111,7 +111,7 @@ class EquiposCreateController {
 
     }
 
-    Equipos? equipos = new Equipos(
+    Equipos equipos = Equipos(
       name: name,
       description: description,
       serial: serial,
@@ -155,7 +155,7 @@ class EquiposCreateController {
     descriptionController.text = '';
     serialController.text = '';
     modelController.text = '';
-    id_lavanti.text = '';
+    idLavanti.text = '';
     voltajeController.text = '';
     corrienteController.text = '';
     potenciaController.text = '';
@@ -192,18 +192,18 @@ class EquiposCreateController {
     Widget galleryButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.gallery, numberFile);
-        }, child: Text('Galeria')
+        }, child: const Text('Galeria')
     );
 
 
     Widget cameraButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.camera, numberFile);
-        }, child: Text('Camera')
+        }, child: const Text('Camera')
     );
 
     AlertDialog alertDialog = AlertDialog(
-      title: Text('Selecciona una imagen'),
+      title: const Text('Selecciona una imagen'),
       actions: [
         galleryButton,
         cameraButton,

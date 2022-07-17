@@ -14,14 +14,14 @@ import 'package:sn_progress_dialog/progress_dialog.dart';
 class RegisterController{
 
   BuildContext? context;
-  TextEditingController emailController     = new TextEditingController();
-  TextEditingController nameController      = new TextEditingController();
-  TextEditingController lastNameController  = new TextEditingController();
+  TextEditingController emailController     =  TextEditingController();
+  TextEditingController nameController      =  TextEditingController();
+  TextEditingController lastNameController  =  TextEditingController();
   //TextEditingController phoneController   = new TextEditingController();
-  TextEditingController passController      = new TextEditingController();
-  TextEditingController passCheckController = new TextEditingController();
+  TextEditingController passController      =  TextEditingController();
+  TextEditingController passCheckController =  TextEditingController();
 
-  UsersProvider usersProvider =  new UsersProvider();
+  UsersProvider usersProvider =  UsersProvider();
 
   PickedFile? pickedFile;
   File? imageFile;
@@ -33,7 +33,7 @@ class RegisterController{
   bool isEnable = true;
 
 
-  Future? init(BuildContext context, Function refresh){
+  Future<void> init(BuildContext context, Function refresh)async{
     this.context = context;
     this.refresh = refresh;
     usersProvider.init(context);
@@ -75,7 +75,7 @@ class RegisterController{
 
   isEnable = false;
 
-  User user = new User(
+  User user = User(
     email   : email,
     name    : name,
     lastname: lastName,
@@ -99,7 +99,7 @@ class RegisterController{
 
     if(responseApi.success?? false){
 
-      Future.delayed(Duration(seconds: 3),(){
+      Future.delayed(const Duration(seconds: 3),(){
 
         Navigator.pushReplacementNamed(context!, 'login');
 
@@ -130,18 +130,18 @@ class RegisterController{
     Widget galleryButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.gallery);
-        }, child: Text('Galeria')
+        }, child: const Text('Galeria')
     );
 
 
     Widget cameraButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.camera);
-        }, child: Text('Camera')
+        }, child: const Text('Camera')
     );
 
     AlertDialog alertDialog = AlertDialog(
-      title: Text('Selecciona una imagen'),
+      title: const Text('Selecciona una imagen'),
       actions: [
         galleryButton,
         cameraButton,
@@ -158,9 +158,7 @@ class RegisterController{
 
 
   void back(){
-
     Navigator.pop(context!);
-
   }
 
 

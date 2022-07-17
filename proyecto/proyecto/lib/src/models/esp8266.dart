@@ -43,11 +43,10 @@ class Esp8266 {
   );
 
   Esp8266.fromJsonList(List<dynamic> jsonList){
-    if(jsonList == null) return;
-    jsonList.forEach((item) {
+    for (var item in jsonList) {
       Esp8266 esp8266 = Esp8266.fromJson(item);
       toList.add(esp8266);
-    });
+    }
   }
 
 

@@ -12,13 +12,13 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 class CerrarSesion{
 
   BuildContext? context;
-  SharedPref _sharedPref =  new SharedPref();
+  final SharedPref _sharedPref = SharedPref();
   Function? refresh;
 
   User? user;
-  CategoriesProvider _categoriesProvider = new CategoriesProvider();
-  EquiposProvider _equiposProvider = new EquiposProvider();
-  CitiesProvider _citiesProvider = new CitiesProvider();
+  final CategoriesProvider _categoriesProvider = CategoriesProvider();
+  final EquiposProvider _equiposProvider = EquiposProvider();
+  final CitiesProvider _citiesProvider = CitiesProvider();
   List<Category> categories = [];
 
   Future? init(BuildContext context, Function refresh) async{
@@ -46,10 +46,10 @@ class CerrarSesion{
     refresh!();
 
   }
-  void openBottomSheet(Equipos equipos){
+  void openBottomSheet(Equipos machine){
     showMaterialModalBottomSheet(
         context: context!,
-        builder: (_) => EquiposDetailsPage(equipos: equipos,)
+        builder: (_) => EquiposDetailsPage(equipos: machine)
     );
   }
 

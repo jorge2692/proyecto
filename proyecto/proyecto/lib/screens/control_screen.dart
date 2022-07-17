@@ -18,9 +18,9 @@ class ControlScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: [
+            children: const [
               Valores(),
-              const Prueba()
+              Prueba()
             ],
           ),
         )

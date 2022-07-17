@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class DataMachine {
 
   final String id;
@@ -8,6 +6,5 @@ class DataMachine {
   final String tipo;
 
   DataMachine({required this.id, required this.serial, required this.fecha, required this.tipo});
-
 
 }

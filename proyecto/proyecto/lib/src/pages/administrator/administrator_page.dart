@@ -4,13 +4,16 @@ import 'package:proyecto/src/utils/my_colors.dart';
 import 'package:proyecto/widgets/cerrar_sesion.dart';
 
 class AdministratorPage extends StatefulWidget {
+
+  const AdministratorPage({Key? key}) : super(key: key);
+
   @override
   _AdministratorPage createState() => _AdministratorPage();
 }
 
 class _AdministratorPage extends State<AdministratorPage> {
 
-  CerrarSesion _con = new CerrarSesion();
+  final CerrarSesion _con = CerrarSesion();
 
   @override
   void initState(){
@@ -27,7 +30,7 @@ class _AdministratorPage extends State<AdministratorPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Lavanti'),
+        title: const Text('Lavanti'),
         backgroundColor: MyColors.primaryColor,
         elevation: 0,
       ),
@@ -56,14 +59,14 @@ Widget _drawer(_con) {
               children: [
                 Text(
                   '${_con.user?.name?? ''} ${_con.user?.lastname?? ''}',
-                  style: TextStyle(fontSize: 18,
+                  style: const TextStyle(fontSize: 18,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                   maxLines: 1,
                 ),
                 Text(
                   _con.user?.email?? '',
-                  style: TextStyle(fontSize: 10,
+                  style: const TextStyle(fontSize: 10,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic),
@@ -71,12 +74,12 @@ Widget _drawer(_con) {
                 ),
                 Container(
                   height: 70,
-                  margin: EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   child: _con.user?.image == null ? _notImg() : FadeInImage(
                     image: NetworkImage(_con.user?.image),
                     fit: BoxFit.contain,
-                    fadeInDuration: Duration(milliseconds: 50),
-                    placeholder: AssetImage('assets/iconavatar.jpeg'),
+                    fadeInDuration: const Duration(milliseconds: 50),
+                    placeholder: const AssetImage('assets/iconavatar.jpeg'),
                   ),
                 )
               ],
@@ -84,38 +87,38 @@ Widget _drawer(_con) {
         ),
         ListTile(
           onTap: _con.goToCategoriaCreate,
-          title: Text('Crear Categoria'),
-          trailing: Icon(Icons.account_tree_rounded),
+          title: const Text('Crear Categoria'),
+          trailing: const Icon(Icons.account_tree_rounded),
         ),
         ListTile(
           onTap: _con.goToEdificioCreate,
-          title: Text('Crear Edificio'),
-          trailing: Icon(Icons.add_business),
+          title: const Text('Crear Edificio'),
+          trailing: const Icon(Icons.add_business),
         ),
         ListTile(
           onTap: _con.goToCityCreate,
-          title: Text('Crear Ciudad'),
-          trailing: Icon(Icons.add_location_outlined ),
+          title: const Text('Crear Ciudad'),
+          trailing: const Icon(Icons.add_location_outlined ),
         ),
         ListTile(
           onTap: _con.goToEquiposCreate,
-          title: Text('Crear Equipo'),
-          trailing: Icon(Icons.local_laundry_service_outlined),
+          title: const Text('Crear Equipo'),
+          trailing: const Icon(Icons.local_laundry_service_outlined),
         ),
         ListTile(
           onTap: _con.goToEspCreate,
-          title: Text('Crear Modulo Esp'),
-          trailing: Icon(Icons.account_tree_rounded),
+          title: const Text('Crear Modulo Esp'),
+          trailing: const Icon(Icons.account_tree_rounded),
         ),
         ListTile(
           onTap: _con.goToRoles,
-          title: Text('Seleccionar Rol'),
-          trailing: Icon(Icons.person_outline),
+          title: const Text('Seleccionar Rol'),
+          trailing: const Icon(Icons.person_outline),
         ),
         ListTile(
           onTap: _con.logout,
-          title: Text('Cerrar Sesion'),
-          trailing: Icon(Icons.power_settings_new_rounded),
+          title: const Text('Cerrar Sesion'),
+          trailing: const Icon(Icons.power_settings_new_rounded),
         ),
 
       ],

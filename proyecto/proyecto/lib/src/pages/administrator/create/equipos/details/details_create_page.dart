@@ -8,8 +8,9 @@ import 'package:proyecto/src/utils/my_colors.dart';
 
 class EquiposDetailsPage extends StatefulWidget {
 
-  Equipos? equipos;
-  EquiposDetailsPage({Key? key, @required this.equipos}): super(key: key);
+  final Equipos? equipos;
+
+  const EquiposDetailsPage({Key? key, @required this.equipos}): super(key: key);
 
   @override
   _EquiposDetailsPageState createState() => _EquiposDetailsPageState();
@@ -17,7 +18,7 @@ class EquiposDetailsPage extends StatefulWidget {
 
 class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
   bool prueba = false;
-  EquiposDetailsController _con = new EquiposDetailsController();
+  final EquiposDetailsController _con = EquiposDetailsController();
 
 
   @override
@@ -34,18 +35,16 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(builder: (context, AsyncSnapshot<Esp8266?> snapshot){
       if(snapshot.connectionState==ConnectionState.waiting){
-
-        return CircularProgressIndicator();
-
+        return const CircularProgressIndicator();
       }
-      return Container(
+      return SizedBox(
         height: MediaQuery.of(context).size.height *0.9,
         child: Column(
           children: [
             _imageSlideshow(),
             _textName(),
             _textDescription(),
-            Spacer(),
+            const Spacer(),
             _buttonEncendido(snapshot.data)
           ],
         ),
@@ -61,10 +60,10 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
   Widget _textName(){
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(left: 30,top: 20, right: 10),
+      margin: const EdgeInsets.only(left: 30,top: 20, right: 10),
       child: Text(
         _con.equipos?.name ?? '',
-        style: TextStyle(
+        style: const TextStyle(
         fontSize: 20,
           fontWeight: FontWeight.bold
         )
@@ -93,7 +92,7 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
               child: Container(
                 height: 50,
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   'On',
                   style: TextStyle(
                     fontSize: 16,
@@ -105,8 +104,8 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                child: Icon(Icons.power_settings_new_rounded),
-                margin: EdgeInsets.only(left: 50, top: 10),
+                child: const Icon(Icons.power_settings_new_rounded),
+                margin: const EdgeInsets.only(left: 50, top: 10),
                 height: 30,
               ),
             )
@@ -122,10 +121,10 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
   Widget _textDescription(){
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(left: 30,top: 20, right: 10),
+      margin: const EdgeInsets.only(left: 30,top: 20, right: 10),
       child: Text(
           _con.equipos?.description ?? '',
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 13,
           )
       ),
@@ -152,8 +151,8 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
               FadeInImage(
                   image:NetworkImage(_con.equipos!.image1!),
                   fit: BoxFit.cover,
-                  fadeInDuration: Duration(milliseconds: 50),
-                  placeholder: AssetImage('assets/lavadora-sinfondo.png'),
+                  fadeInDuration: const Duration(milliseconds: 50),
+                  placeholder: const AssetImage('assets/lavadora-sinfondo.png'),
               ),
             ),
 
@@ -162,8 +161,8 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
               FadeInImage(
                 image:NetworkImage(_con.equipos!.image2!),
                 fit: BoxFit.cover,
-                fadeInDuration: Duration(milliseconds: 50),
-                placeholder: AssetImage('assets/lavadora-sinfondo.png'),
+                fadeInDuration: const Duration(milliseconds: 50),
+                placeholder: const AssetImage('assets/lavadora-sinfondo.png'),
               ),
             ),
           ],

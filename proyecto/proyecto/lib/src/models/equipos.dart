@@ -56,11 +56,10 @@ class Equipos {
   );
 
   Equipos.fromJsonList(List<dynamic> jsonList){
-    if(jsonList == null) return;
-    jsonList.forEach((item) {
+    for (var item in jsonList) {
       Equipos equipos = Equipos.fromJson(item);
       toList.add(equipos);
-    });
+    }
   }
 
   List<Equipos> fromJsonList2(List<dynamic>? list) {

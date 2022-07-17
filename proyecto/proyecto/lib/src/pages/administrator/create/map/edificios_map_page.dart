@@ -5,6 +5,9 @@ import 'package:proyecto/src/pages/administrator/create/map/edificios_map_contro
 import 'package:proyecto/src/utils/my_colors.dart';
 
 class EdificiosMapPage extends StatefulWidget {
+
+  const EdificiosMapPage({Key? key}) : super(key: key);
+
   @override
   _EdificiosMapPageState createState() => _EdificiosMapPageState();
 }
@@ -27,7 +30,7 @@ class _EdificiosMapPageState extends State<EdificiosMapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Direccion'),
+        title: const Text('Nueva Direccion'),
         backgroundColor: MyColors.primaryColor,
       ),
       body: Stack(
@@ -38,7 +41,7 @@ class _EdificiosMapPageState extends State<EdificiosMapPage> {
             child: _iconMyLocation(),
           ),
           Container(
-            margin: EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(top: 30),
             alignment: Alignment.topCenter,
             child: _cardAddress(),
           ),
@@ -55,16 +58,16 @@ class _EdificiosMapPageState extends State<EdificiosMapPage> {
     return Container(
       height: 50,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 70, vertical: 10),
       child: ElevatedButton(
         onPressed: _con?.selectRefPoint,
-        child: Text('Seleccionar este Punto'),
+        child: const Text('Seleccionar este Punto'),
         style: ElevatedButton.styleFrom(
             primary: MyColors.primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30)
             ),
-            padding: EdgeInsets.symmetric(vertical: 12)
+            padding: const EdgeInsets.symmetric(vertical: 12)
         ),
       ),
     );
@@ -74,17 +77,17 @@ class _EdificiosMapPageState extends State<EdificiosMapPage> {
 
 
   Widget _cardAddress(){
-    return Container(
+    return SizedBox(
       child: Card(
         color: Colors.grey[500],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20)
         ),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Text(
             _con?.addressName ?? '',
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.bold,

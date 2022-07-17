@@ -4,7 +4,6 @@ import 'package:proyecto/providers/cities_provider.dart';
 import 'package:proyecto/src/models/city.dart';
 import 'package:proyecto/src/models/user.dart';
 import 'package:proyecto/src/utils/shared_pref.dart';
-import 'package:sn_progress_dialog/progress_dialog.dart';
 import 'package:proyecto/src/models/address.dart';
 
 
@@ -14,30 +13,23 @@ class EquiposSearchController{
   Function? refresh;
 
 
-  CitiesProvider _citiesProvider = new CitiesProvider();
-  AddressProvider _addressProvider = new AddressProvider();
+  final CitiesProvider _citiesProvider = CitiesProvider();
+  final AddressProvider _addressProvider = AddressProvider();
 
   User? user;
-  SharedPref sharedPref= new SharedPref();
+  SharedPref sharedPref = SharedPref();
 
   List<City> cities = [];
   List<Address> edificios = [];
   List<Address> address = [];
 
-
-
   String? idCity;
   String? nameAddress;
-
-
-
-  ProgressDialog? _progressDialog;
 
   Future? init(BuildContext context, Function refresh) async {
 
     this.context = context;
     this.refresh = refresh;
-    _progressDialog = new ProgressDialog(context: context);
     user = User.fromJson(await sharedPref.read('user'));
 
 
@@ -60,7 +52,6 @@ class EquiposSearchController{
 
   void goToHistoryPage(){
     Navigator.pushNamed(context!, 'HistoryPage');
-
   }
 
 }

@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto/screens/equipo_screen.dart';
 
 class EdificioScreen extends StatelessWidget {
 
   static const paddingHorizontalCommon = EdgeInsets.only(left: 9, right: 9);
   static const double productCardAspectRatio = (2.5/1);
 
+  const EdificioScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edificios'),
+        title: const Text('Edificios'),
         elevation: 0,
         actions: [
           IconButton(
-              icon: Icon(Icons.search_outlined),
+              icon: const Icon(Icons.search_outlined),
               onPressed: () {})
         ],
       ),
         body: SingleChildScrollView(
           child: Column(
-            children: [
+            children: const [
               EdificioScreen()
-
-
-
             ],
           ),
         )

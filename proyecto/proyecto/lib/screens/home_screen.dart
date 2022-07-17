@@ -86,11 +86,11 @@ class _HomeScreen extends State<HomeScreen> {
                       );
                     }
                     else{
-                      return NoDataWidget(text: 'no hay equipos');
+                      return const NoDataWidget(text: 'no hay equipos');
                     }
                   }
                   else{
-                    return NoDataWidget(text: 'no hay equipos');
+                    return const NoDataWidget(text: 'no hay equipos');
                   }
 
               }

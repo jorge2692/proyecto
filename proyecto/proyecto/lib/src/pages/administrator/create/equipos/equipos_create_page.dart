@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/models/category.dart';
@@ -21,7 +19,7 @@ class EquiposCreatePage extends StatefulWidget {
 
 class _EquiposCreatePageState extends State<EquiposCreatePage> {
 
-  final EquiposCreateController _con = new EquiposCreateController();
+  final EquiposCreateController _con = EquiposCreateController();
 
   @override
   void initState() {
@@ -55,8 +53,8 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _CardImage(_con.imageFile1, 1),
-                  _CardImage(_con.imageFile2, 2)
+                  _cardImage(_con.imageFile1, 1),
+                  _cardImage(_con.imageFile2, 2)
 
                 ],
               ),
@@ -228,7 +226,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
   }
 
 
-  Widget _CardImage(File? imageFile, int numberFile){
+  Widget _cardImage(File? imageFile, int numberFile){
     // BuildContext context;
     return GestureDetector(
       onTap: (){
@@ -396,7 +394,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
           borderRadius: BorderRadius.circular(30)
       ),
       child: TextField(
-        controller:_con.id_lavanti ,
+        controller:_con.idLavanti ,
         maxLines: 1,
         maxLength: 30,
         decoration: InputDecoration(
@@ -433,7 +431,7 @@ class _EquiposCreatePageState extends State<EquiposCreatePage> {
               color: MyColors.primaryColorDark
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(10),
           prefixIcon: Icon(
             Icons.broken_image_outlined,
             color: MyColors.primaryColor,),

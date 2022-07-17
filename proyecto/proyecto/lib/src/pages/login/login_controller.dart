@@ -10,11 +10,11 @@ class LoginController{
   BuildContext? context;
 
 
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passController  = new TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController  = TextEditingController();
 
-  UsersProvider usersProvider = new UsersProvider();
-  SharedPref _sharedPref = new SharedPref();
+  UsersProvider usersProvider = UsersProvider();
+  final SharedPref _sharedPref = SharedPref();
 
   Future? init(BuildContext context) async {
     this.context = context;

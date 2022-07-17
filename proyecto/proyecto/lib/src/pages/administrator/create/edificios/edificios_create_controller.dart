@@ -104,7 +104,7 @@ class EdificiosCreateController {
           context: context!,
           isDismissible: false,
           enableDrag: false,
-          builder: (context) => EdificiosMapPage()
+          builder: (context) => const EdificiosMapPage()
       );
       if (refPoint != null){
         refPointController.text = refPoint!['address'];

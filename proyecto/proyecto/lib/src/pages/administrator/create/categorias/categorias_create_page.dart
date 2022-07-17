@@ -4,6 +4,9 @@ import 'package:proyecto/src/pages/administrator/create/categorias/categorias_cr
 import 'package:proyecto/src/utils/my_colors.dart';
 
 class CategoriaCreatePage extends StatefulWidget {
+
+  const CategoriaCreatePage({Key? key}) : super(key: key);
+
   @override
   _CategoriaCreatePageState createState() => _CategoriaCreatePageState();
 }
@@ -81,7 +84,7 @@ Widget _textFieldCategoria(_con) {
             color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.list_alt_outlined,
           color: MyColors.primaryColor,),

@@ -5,19 +5,21 @@ import 'package:proyecto/src/utils/my_colors.dart';
 
 
 class CityCreatePage extends StatefulWidget {
+
+  const CityCreatePage({Key? key}) : super(key: key);
+
   @override
   _CityCreatePageState createState() => _CityCreatePageState();
 }
 
 class _CityCreatePageState extends State<CityCreatePage> {
 
-  CityCreateController _con = new CityCreateController();
+  final CityCreateController _con = CityCreateController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);});
   }
 
@@ -25,14 +27,14 @@ class _CityCreatePageState extends State<CityCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Ciudad'),
+        title: const Text('Nueva Ciudad'),
         backgroundColor: MyColors.primaryColor,
       ),
       body: Column(
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           _textFieldCity(_con),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           _textFieldDepartment(_con)
 
         ],
@@ -51,16 +53,16 @@ Widget _buttonCreate(_con) {
   return Container(
     height: 50,
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     child: ElevatedButton(
       onPressed:_con.createCity,
-      child: Text('Crear Nueva Ciudad'),
+      child: const Text('Crear Nueva Ciudad'),
       style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)
           ),
-          padding: EdgeInsets.symmetric(vertical: 12)
+          padding: const EdgeInsets.symmetric(vertical: 12)
       ),
     ),
   );
@@ -69,7 +71,7 @@ Widget _buttonCreate(_con) {
 
 Widget _textFieldCity(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     child: TextField(
         controller: _con?.nameController,
         decoration: InputDecoration(
@@ -83,7 +85,7 @@ Widget _textFieldCity(_con) {
 
 Widget _textFieldDepartment(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     child: TextField(
         controller: _con?.departmentController,
         maxLength: 125,

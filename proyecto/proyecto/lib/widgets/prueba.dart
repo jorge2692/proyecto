@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 
 class Prueba extends StatelessWidget {
+
+  const Prueba({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-
-
-
-    return Center(
-        child: MyStatefulWidget(),
+    return const Center(
+      child: MyStatefulWidget(),
     );
   }
 }
+
 bool _state = false;
 
 class MyStatefulWidget extends StatefulWidget {

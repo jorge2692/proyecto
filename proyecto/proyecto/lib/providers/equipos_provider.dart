@@ -13,13 +13,13 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 
 class EquiposProvider {
 
-  String _url = Environment.API_TESIS;
-  String _api = '/api/machines';
+  final String _url = Environment.API_TESIS;
+  final String _api = '/api/machines';
 
   BuildContext? context;
   User? sessionUser;
 
-  Future? init(BuildContext context, User? sessionUser){
+  Future<void> init(BuildContext context, User? sessionUser)async{
     this.context = context;
     this.sessionUser = sessionUser;
   }
@@ -37,7 +37,7 @@ class EquiposProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       var data = json.decode(res.body);
@@ -93,7 +93,7 @@ class EquiposProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       var data = json.decode(res.body);

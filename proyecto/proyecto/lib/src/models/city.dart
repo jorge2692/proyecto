@@ -24,11 +24,10 @@ class City {
   );
 
   City.fromJsonList(List<dynamic> jsonList){
-    if(jsonList == null) return;
-    jsonList.forEach((item) {
+    for (var item in jsonList) {
       City city = City.fromJson(item);
       toList.add(city);
-    });
+    }
   }
 
 

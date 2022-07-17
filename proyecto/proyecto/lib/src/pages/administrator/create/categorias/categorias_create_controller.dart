@@ -10,13 +10,13 @@ class CategoriaCreateController {
 
   BuildContext? context;
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController descriptionController = new TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   Function? refresh;
 
-  CategoriesProvider _categoriesProvider = new CategoriesProvider();
+  final CategoriesProvider _categoriesProvider = CategoriesProvider();
   User? user;
-  SharedPref sharedPref= new SharedPref();
+  final SharedPref sharedPref= SharedPref();
 
 
   Future? init(BuildContext context, Function refresh) async {
@@ -37,7 +37,7 @@ class CategoriaCreateController {
       return;
     }
 
-    Category category = new Category(
+    Category category = Category(
       name: name,
       description: description,
     );

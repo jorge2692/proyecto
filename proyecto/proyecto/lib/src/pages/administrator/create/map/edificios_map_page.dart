@@ -19,7 +19,7 @@ class _EdificiosMapPageState extends State<EdificiosMapPage> {
     // TODO: implement initState
     super.initState();
     _con = EdificiosMapController();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con?.init(context, refresh);});
   }
 

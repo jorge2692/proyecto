@@ -22,12 +22,13 @@ class _LoginPageState extends State<LoginPage> {
 
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context);
     }
     );
 }
 
+  @override
   Widget build(BuildContext context) {
 
     return Scaffold(

@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto/src/pages/administrator/administrator_page.dart';
 import 'package:proyecto/src/pages/administrator/create/categorias/categorias_create_page.dart';
@@ -7,7 +9,6 @@ import 'package:proyecto/src/pages/administrator/create/equipos/equipos_create_p
 import 'package:proyecto/src/pages/administrator/create/equipos/history/history_page.dart';
 import 'package:proyecto/src/pages/administrator/create/esp8266/esp_create_page.dart';
 import 'package:proyecto/src/pages/administrator/create/map/edificios_map_page.dart';
-import 'package:proyecto/src/pages/administrator/search/equipos_search_controller.dart';
 import 'package:proyecto/src/pages/administrator/search/equipos_search_page.dart';
 import 'package:proyecto/src/pages/client/update/update_page.dart';
 import 'package:proyecto/src/pages/esp8266/update/esp_update_page.dart';
@@ -18,10 +19,29 @@ import 'package:proyecto/src/utils/my_colors.dart';
 import 'screens/screen.dart';
 
 
-void main() => runApp(MyApp());
+void main() async{
+  //WidgetsFlutterBinding.ensureInitialized();
 
+  /// init a firebase app
+  await Firebase.initializeApp();
+
+  // Set the background messaging handler early on, as a named top-level function
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  runApp(const MyApp());
+}
+
+
+
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('hola');
+}
 
 class MyApp extends StatelessWidget {
+
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,9 +50,9 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes:{
         'login': ( _ ) => LoginPage(),
-        'roles': ( _ ) => RolesPages(),
+        'roles': ( _ ) => const RolesPages(),
         'register': ( _ ) => RegisterPage(),
-        'client': ( _ ) => HomeScreen(),
+        'client': ( _ ) => const HomeScreen(),
         'administrator': ( _ ) => AdministratorPage(),
         'details': ( _ ) => DetailsScreen(),
         'edificio': ( _ ) => EdificioScreen(),

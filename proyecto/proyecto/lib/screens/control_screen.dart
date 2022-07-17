@@ -3,26 +3,24 @@ import 'package:proyecto/widgets/widgets.dart';
 
 
 class ControlScreen extends StatelessWidget {
+
+  const ControlScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
         leading: IconButton(
           onPressed: () { },
-          icon: Icon(Icons.more_vert_sharp),
+          icon: const Icon(Icons.more_vert_sharp),
         ),
-        title: Text('Torre 1'), elevation: 0,
+        title: const Text('Torre 1'), elevation: 0,
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Valores(),
-
-              Prueba()
-
-
-
-
+              const Prueba()
             ],
           ),
         )

@@ -11,13 +11,12 @@ class CategoriaCreatePage extends StatefulWidget {
 
 class _CategoriaCreatePageState extends State<CategoriaCreatePage> {
 
-  CategoriaCreateController _con = new CategoriaCreateController();
+  final CategoriaCreateController _con = CategoriaCreateController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);});
   }
 
@@ -25,14 +24,14 @@ class _CategoriaCreatePageState extends State<CategoriaCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Categoria'),
+        title: const Text('Nueva Categoria'),
         backgroundColor: MyColors.primaryColor,
       ),
       body: Column(
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           _textFieldCategoria(_con),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           _textFieldDescripcion(_con)
 
         ],
@@ -51,16 +50,16 @@ Widget _buttonCreate(_con) {
   return Container(
     height: 50,
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     child: ElevatedButton(
       onPressed:_con.createCategory,
-      child: Text('Crear Categoria'),
+      child: const Text('Crear Categoria'),
       style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)
           ),
-          padding: EdgeInsets.symmetric(vertical: 12)
+          padding: const EdgeInsets.symmetric(vertical: 12)
       ),
     ),
   );
@@ -69,7 +68,7 @@ Widget _buttonCreate(_con) {
 
 Widget _textFieldCategoria(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30)
@@ -93,8 +92,8 @@ Widget _textFieldCategoria(_con) {
 
 Widget _textFieldDescripcion(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-    padding: EdgeInsets.all(10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    padding: const EdgeInsets.all(10),
     decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30)
@@ -109,7 +108,7 @@ Widget _textFieldDescripcion(_con) {
             color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.description,
           color: MyColors.primaryColor,),

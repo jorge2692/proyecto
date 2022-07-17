@@ -17,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);}
     );
   }
@@ -181,34 +181,9 @@ Widget _textFieldLastName(_con) {
   );
 }
 
-Widget _textFieldPhone(_con) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-    decoration: BoxDecoration(
-        color: MyColors.primaryOpacityColor,
-        borderRadius: BorderRadius.circular(30)
-    ),
-    child: TextField(
-      controller: _con.phoneController,
-      keyboardType: TextInputType.phone,
-      decoration: InputDecoration(
-        hintText: 'Phone Number',
-        hintStyle: TextStyle(
-            color: MyColors.primaryColorDark
-        ),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
-        prefixIcon: Icon(
-          Icons.phone,
-          color: MyColors.primaryColor,),
-      ),
-    ),
-  );
-}
-
 Widget _textFieldPassword(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/pages/client/update/update_controller.dart';
-import 'package:proyecto/src/pages/register/register_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 
 class UpdatePage extends StatefulWidget {
+
+  const UpdatePage({Key? key}) : super(key: key);
+
   @override
   _UpdatePageState createState() => _UpdatePageState();
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  UpdateController _con = new UpdateController();
+
+  final UpdateController _con = UpdateController();
 
   @override
 
@@ -18,7 +21,7 @@ class _UpdatePageState extends State<UpdatePage> {
 
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);}
     );
   }
@@ -28,19 +31,19 @@ class _UpdatePageState extends State<UpdatePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.primaryColor,
-        title: Text('Editar perfil')
+        title: const Text('Editar perfil')
       ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 50),
-                _imageRegister(_con),
-                    SizedBox(height: 25),
-                      _textFieldName(_con),
-                      _textFieldLastName(_con),
-              ],
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              _imageRegister(_con),
+              const SizedBox(height: 25),
+              _textFieldName(_con),
+              _textFieldLastName(_con),
+            ],
             ),
           ),
         ),
@@ -53,18 +56,6 @@ class _UpdatePageState extends State<UpdatePage> {
 
     });
   }
-}
-
-
-Widget _circulo() {
-  return Container(
-    width: 240,
-    height: 240,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(120),
-      color: MyColors.primaryColor,
-    ),
-  );
 }
 
 
@@ -115,7 +106,7 @@ Widget _imageUser(_con){
 
 Widget _textFieldName(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),
@@ -128,7 +119,7 @@ Widget _textFieldName(_con) {
             color: MyColors.primaryColorDark,
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(15),
           prefixIcon: Icon(
             Icons.person,
             color: MyColors.primaryColor,
@@ -141,7 +132,7 @@ Widget _textFieldName(_con) {
 
 Widget _textFieldLastName(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30)
@@ -154,7 +145,7 @@ Widget _textFieldLastName(_con) {
             color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.person_outline,
           color: MyColors.primaryColor,),
@@ -167,16 +158,16 @@ Widget _textFieldLastName(_con) {
 Widget _buttonRegister(_con) {
   return Container(
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     child: ElevatedButton(
       onPressed:_con.isEnable ? _con.update : null,
-      child: Text('Actualizar'),
+      child: const Text('Actualizar'),
       style: ElevatedButton.styleFrom(
           primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)
           ),
-          padding: EdgeInsets.symmetric(vertical: 12)
+          padding: const EdgeInsets.symmetric(vertical: 12)
       ),
     ),
   );

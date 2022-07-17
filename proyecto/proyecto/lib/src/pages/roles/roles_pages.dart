@@ -21,7 +21,7 @@ class _RolesPagesState extends State<RolesPages> {
     // TODO: implement initState
     super.initState();
 
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);
 
     });

@@ -24,7 +24,7 @@ class _EquiposDetailsPageState extends State<EquiposDetailsPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp){
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp){
       _con.init(context,refresh, widget.equipos!);
     });
   }

@@ -24,11 +24,10 @@ class Category {
   );
 
   Category.fromJsonList(List<dynamic> jsonList){
-      if(jsonList == null) return;
-      jsonList.forEach((item) {
+      for (var item in jsonList) {
         Category category = Category.fromJson(item);
         toList.add(category);
-      });
+      }
   }
 
   Map<String, dynamic> toJson() => {

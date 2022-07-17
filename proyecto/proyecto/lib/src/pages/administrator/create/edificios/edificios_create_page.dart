@@ -19,7 +19,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
     // TODO: implement initState
     _con = EdificiosCreateController();
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con?.init(context, refresh);});
   }
 

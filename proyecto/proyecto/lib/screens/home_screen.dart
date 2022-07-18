@@ -81,7 +81,7 @@ class _HomeScreen extends State<HomeScreen> {
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             childAspectRatio: 0.9,
-                          ),
+                            ),
                           itemCount: snapshot.data?.length ?? 0,
                           itemBuilder: (_, index) {
                             return _cardEquipo(snapshot.data![index]);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/models/city.dart';
 import 'package:proyecto/src/models/equipos.dart';
+import 'package:proyecto/src/pages/administrator/create/equipos/equipos_building/equipos_building_page.dart';
 import 'package:proyecto/src/pages/administrator/search/equipos_search_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 import 'package:proyecto/src/models/address.dart';
@@ -28,32 +29,34 @@ class _EquiposSearchPageState extends State<EquiposSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: SafeArea(
+          child: Column(
 
-          children: [_dropDownCities(_con.cities, _con),
-              Expanded (child: ListView.builder(
+            children: [_dropDownCities(_con.cities, _con),
+                Expanded (child: ListView.builder(
 
-                itemCount:_con.edificios.length,
-                itemBuilder: (context, int index) {
-                  print("hello");
+                  itemCount:_con.edificios.length,
+                  itemBuilder: (context, int index) {
+                    print("hello");
 
-                  return GestureDetector(
-                    onTap: () {
-                      _con.goToHistoryPage();
-                      setState(() {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EquiposBuildingPage(buildingId: _con.edificios[index].id??'')));
 
-                        print("Gesture Detector");
-                      });
-                    },
-                    child: ListTile(
-                      title: Text('${_con.edificios[index].name}'),
-                    ),
-                  );
-                },
+                          print("Gesture Detector");
+                        });
+                      },
+                      child: ListTile(
+                        title: Text('${_con.edificios[index].name}'),
+                      ),
+                    );
+                  },
 
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
     );
   }

@@ -34,7 +34,6 @@ class EquiposDetailsController{
   Future<Esp8266?> getEspByMachine(String idMachine) async{
     Future.delayed(Duration(seconds: 2));
     return await _esp8266Provider.getByMachine(idMachine);
-    String? gpio0Update = esp8266!.idEsp;
 
   }
 

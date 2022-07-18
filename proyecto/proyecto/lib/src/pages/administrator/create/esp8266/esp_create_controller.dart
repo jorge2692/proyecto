@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:proyecto/providers/address_provider.dart';
 import 'package:proyecto/providers/cities_provider.dart';
@@ -19,18 +17,18 @@ class EspCreateController {
 
   BuildContext? context;
 
-  TextEditingController idEspController = new TextEditingController();
-  TextEditingController ssidController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController idEspController = TextEditingController();
+  TextEditingController ssidController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Function? refresh;
 
-  EquiposProvider _equiposProvider = new EquiposProvider();
-  Esp8266Provider _esp8266Provider = new Esp8266Provider();
-  AddressProvider _addressProvider = new AddressProvider();
-  CitiesProvider _citiesProvider = new CitiesProvider();
+  final EquiposProvider _equiposProvider = EquiposProvider();
+  final Esp8266Provider _esp8266Provider = Esp8266Provider();
+  final AddressProvider _addressProvider = AddressProvider();
+  final CitiesProvider _citiesProvider = CitiesProvider();
   User? user;
-  SharedPref sharedPref= new SharedPref();
+  SharedPref sharedPref = SharedPref();
 
   List<Address> edificios = [];
   List<Address> address = [];
@@ -50,7 +48,7 @@ class EspCreateController {
 
     this.context = context;
     this.refresh = refresh;
-    _progressDialog = new ProgressDialog(context: context);
+    _progressDialog = ProgressDialog(context: context);
     user = User.fromJson(await sharedPref.read('user'));
 
     _equiposProvider.init(context, user);
@@ -117,18 +115,12 @@ class EspCreateController {
 
 
 
-    Esp8266? esp8266 = new Esp8266(
-
+    Esp8266? esp8266 = Esp8266(
         idEsp: idesp,
         ssid: ssid,
         password: password,
-        idLavanti: int.parse(idLavanti??'0'),
-
-
-
+        idLavanti: int.parse(idLavanti??'0')
     );
-
-
 
     _progressDialog!.show(max: 100, msg: 'Espere un momento');
     ResponseApi? responseApi = await _esp8266Provider.create(esp8266);
@@ -137,9 +129,7 @@ class EspCreateController {
     _progressDialog?.close();
 
     if (responseApi?.success??false) {
-
       resetValues();
-
     }
 
 

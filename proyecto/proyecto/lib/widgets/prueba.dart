@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class Prueba extends StatelessWidget {
+
+  const Prueba({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-
-
-
-    return Center(
-        child: MyStatefulWidget(),
+    return const Center(
+      child: MyStatefulWidget(),
     );
   }
 }
+
 bool _state = false;
 
 class MyStatefulWidget extends StatefulWidget {
@@ -28,7 +28,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     final size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: size.height * 0.4,
       child: Column(

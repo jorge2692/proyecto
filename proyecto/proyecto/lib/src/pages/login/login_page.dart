@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:proyecto/src/pages/login/login_controller.dart';
@@ -8,13 +6,16 @@ import 'package:proyecto/src/utils/my_colors.dart';
 
 
 class LoginPage extends StatefulWidget {
+
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
 
-  LoginController _con = new LoginController();
+  final LoginController _con = LoginController();
 
   @override
 
@@ -22,18 +23,19 @@ class _LoginPageState extends State<LoginPage> {
 
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context);
     }
     );
 }
 
+  @override
   Widget build(BuildContext context) {
 
     return Scaffold(
 
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Stack(
             children: [
@@ -79,7 +81,7 @@ Widget _logoLavanti(BuildContext context){
         margin:EdgeInsets.only(top: 150,
             bottom: MediaQuery.of(context).size.height*0.15
         ),
-      child: CircleAvatar(
+      child: const CircleAvatar(
         backgroundImage: AssetImage(
           'assets/logo-lavanti.png',
         ),
@@ -90,7 +92,7 @@ Widget _logoLavanti(BuildContext context){
 
 Widget _campoUser(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),
@@ -104,7 +106,7 @@ Widget _campoUser(_con) {
             color: MyColors.primaryColorDark,
           ),
           border: InputBorder.none,
-      contentPadding: EdgeInsets.all(15),
+      contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
             Icons.email_outlined,
             color: MyColors.primaryColor)
@@ -115,7 +117,7 @@ Widget _campoUser(_con) {
 
 Widget _campoPassword(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30)
@@ -129,7 +131,7 @@ Widget _campoPassword(_con) {
             color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(Icons.lock,
         color: MyColors.primaryColor,)
       ),
@@ -140,15 +142,15 @@ Widget _campoPassword(_con) {
 Widget _boton(_con) {
   return  Container(
     width: double.infinity,
-    margin: EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+    margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
     child: ElevatedButton(
         onPressed: _con.login,
-        child: Text('Sign In'),
+        child: const Text('Sign In'),
       style: ElevatedButton.styleFrom(primary: MyColors.primaryColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30)
       ),
-          padding: EdgeInsets.symmetric(vertical: 12)
+          padding: const EdgeInsets.symmetric(vertical: 12)
       ),
     ),
   );
@@ -161,9 +163,7 @@ Widget _textDontHaveAccount(BuildContext context) {
     Text('Forget your password',
             style: TextStyle(color: MyColors.primaryColor)
         ),
-      SizedBox(width: 7),
-
-
+      const SizedBox(width: 7),
       GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'register'),
         child: Text('Sign Up',

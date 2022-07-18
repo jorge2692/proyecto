@@ -41,11 +41,10 @@ class Address {
   );
 
   Address.fromJsonList(List<dynamic> jsonList){
-    if(jsonList == null) return;
-    jsonList.forEach((item) {
+    for (var item in jsonList) {
       Address address = Address.fromJson(item);
       toList.add(address);
-    });
+    }
   }
 
   Map<String, dynamic> toJson() => {

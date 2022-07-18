@@ -14,19 +14,19 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 class EdificiosCreateController {
 
   BuildContext? context;
-  TextEditingController refPointController = new TextEditingController();
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController addressController = new TextEditingController();
-  TextEditingController neighborhoodController = new TextEditingController();
-  TextEditingController cityController = new TextEditingController();
+  TextEditingController refPointController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController neighborhoodController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
   Map<String, dynamic>? refPoint;
 
   Function? refresh;
 
-  AddressProvider _addressProvider = new AddressProvider();
-  CitiesProvider _citiesProvider = new CitiesProvider();
+  final AddressProvider _addressProvider = AddressProvider();
+  final CitiesProvider _citiesProvider = CitiesProvider();
   User? user;
-  SharedPref _sharedPref= new SharedPref();
+  final SharedPref _sharedPref= SharedPref();
 
   List<City> cities = [];
 
@@ -73,7 +73,7 @@ class EdificiosCreateController {
 
     }
 
-    Address address = new Address(
+    Address address = Address(
       name: name,
       address: addressName,
       neighborhood: neighborhood,
@@ -104,7 +104,7 @@ class EdificiosCreateController {
           context: context!,
           isDismissible: false,
           enableDrag: false,
-          builder: (context) => EdificiosMapPage()
+          builder: (context) => const EdificiosMapPage()
       );
       if (refPoint != null){
         refPointController.text = refPoint!['address'];

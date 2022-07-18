@@ -11,13 +11,13 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 
 class CitiesProvider {
 
-  String _url = Environment.API_TESIS;
-  String _api = '/api/cities';
+  final String _url = Environment.API_TESIS;
+  final String _api = '/api/cities';
 
   BuildContext? context;
   User? sessionUser;
 
-  Future? init(BuildContext context, User? sessionUser){
+  Future<void> init(BuildContext context, User? sessionUser)async{
     this.context = context;
     this.sessionUser = sessionUser;
   }
@@ -34,7 +34,7 @@ class CitiesProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       final data = json.decode(res.body);
@@ -45,9 +45,7 @@ class CitiesProvider {
     }catch(e){
       print('Error CitiesProvider: $e');
       return[];
-
     }
-
 
   }
 
@@ -66,7 +64,7 @@ class CitiesProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       final data = json.decode(res.body);

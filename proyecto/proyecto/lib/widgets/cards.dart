@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 
 class Cards extends StatelessWidget {
+
+  const Cards({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
 
@@ -12,10 +15,12 @@ class Cards extends StatelessWidget {
       onTap: () => Navigator.pushNamed(context, 'ciudad'),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding: EdgeInsets.symmetric(horizontal: 20,vertical:10 ),
-          child: Text('Ciudades', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text('Ciudades',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: size.height * 0.4,
             child: Swiper(
@@ -32,7 +37,7 @@ class Cards extends StatelessWidget {
                             SizedBox(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(25),
-                                child: FadeInImage(
+                                child: const FadeInImage(
                                   placeholder:  AssetImage('assets/no-image.jpg'),
                                   image: NetworkImage('https://via.placeholder.com/400x500'),
                                 ),
@@ -40,14 +45,20 @@ class Cards extends StatelessWidget {
                               height: MediaQuery.of(context).size.width * 0.29,
                               width: MediaQuery.of(context).size.width * 0.3,
                             ),
-                            Padding(padding: EdgeInsets.only(top:1.0),child: Text('hello a ver si pasa lo mismo cuando escribo cosas muy largas en este ejemplo',maxLines: 2,overflow: TextOverflow.ellipsis),)
-                          ],
+                          const Padding(
+                            padding: EdgeInsets.only(top: 1.0),
+                            child: Text(
+                                'hello a ver si pasa lo mismo cuando escribo cosas muy largas en este ejemplo',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                          )
+                        ],
                         ),
                       );
                     }).toList(),
                   );
                 },
-                pagination: SwiperPagination(
+                pagination: const SwiperPagination(
                     margin: EdgeInsets.all(6.0)
                 ),
                 itemCount: 3,

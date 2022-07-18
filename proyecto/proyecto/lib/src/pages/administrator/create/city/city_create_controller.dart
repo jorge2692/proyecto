@@ -10,13 +10,13 @@ class CityCreateController {
 
   BuildContext? context;
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController departmentController = new TextEditingController();
+  final TextEditingController nameController =  TextEditingController();
+  final TextEditingController departmentController =  TextEditingController();
   Function? refresh;
 
-  CitiesProvider _citiesProvider = new CitiesProvider();
+  final CitiesProvider _citiesProvider =  CitiesProvider();
   User? user;
-  SharedPref sharedPref= new SharedPref();
+  final SharedPref sharedPref = SharedPref();
 
 
   Future? init(BuildContext context, Function refresh) async {
@@ -37,7 +37,7 @@ class CityCreateController {
       return;
     }
 
-    City city = new City(
+    City city = City(
       name: name,
       department: department,
     );

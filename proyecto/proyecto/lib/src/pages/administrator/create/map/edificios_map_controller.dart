@@ -15,14 +15,14 @@ class EdificiosMapController{
   String? addressName;
   LatLng? addressLatLng;
 
-  CameraPosition initialPosition = CameraPosition(
+  CameraPosition initialPosition = const CameraPosition(
       target: LatLng(4.6413175,-74.1592189),
     zoom: 15
   );
 
-  Completer<GoogleMapController>_mapController = Completer();
+  final Completer<GoogleMapController>_mapController = Completer();
 
-  Future? init(BuildContext context, Function refresh){
+  Future<void> init(BuildContext context, Function refresh) async{
     this.context = context;
     this.refresh = refresh;
     checkGPS();
@@ -35,9 +35,7 @@ class EdificiosMapController{
       'lng': addressLatLng!.longitude,
 
     };
-
     Navigator.pop(context!, data);
-
   }
 
   Future<Null> setLocationDraggableInfo() async{
@@ -50,14 +48,14 @@ class EdificiosMapController{
       List<Placemark> address = await placemarkFromCoordinates(lat, lng);
 
       if(address != null){
-        if(address.length > 0){
+        if(address.isNotEmpty){
           String? direction = address[0].thoroughfare;
           String? street = address[0].subThoroughfare;
           String? city = address[0].locality;
-          String? deparment = address[0].administrativeArea;
-          String? country = address[0].country;
-          addressName = '$direction #$street, $city, $deparment';
-          addressLatLng = new LatLng(lat, lng);
+          String? department = address[0].administrativeArea;
+         //String? country = address[0].country;
+          addressName = '$direction #$street, $city, $department';
+          addressLatLng = LatLng(lat, lng);
           print('LAT: ${addressLatLng?.latitude}');
           print('LNG: ${addressLatLng?.longitude}');
           refresh!();
@@ -112,18 +110,14 @@ class EdificiosMapController{
 
   Future animateCameraToPosition(double lat,double lng) async {
     GoogleMapController controller = await _mapController.future;
-    if(controller != null){
-
-      controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-              target: LatLng(lat,lng),
-              zoom: 15,
-              bearing: 0,
-          )
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(lat,lng),
+            zoom: 15,
+            bearing: 0,
         )
-      );
-
-    }
+      )
+    );
 
   }
 

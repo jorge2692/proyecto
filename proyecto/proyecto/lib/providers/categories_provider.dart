@@ -11,13 +11,13 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 
 class CategoriesProvider {
 
-  String _url = Environment.API_TESIS;
-  String _api = '/api/categories';
+  final String _url = Environment.API_TESIS;
+  final String _api = '/api/categories';
 
   BuildContext? context;
   User? sessionUser;
 
-  Future? init(BuildContext context, User? sessionUser){
+  Future<void> init(BuildContext context, User? sessionUser) async{
     this.context = context;
     this.sessionUser = sessionUser;
   }
@@ -34,7 +34,7 @@ class CategoriesProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       final data = json.decode(res.body);
@@ -67,7 +67,7 @@ class CategoriesProvider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
     }
 
       final data = json.decode(res.body);

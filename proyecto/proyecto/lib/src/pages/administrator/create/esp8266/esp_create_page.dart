@@ -1,9 +1,6 @@
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:proyecto/src/models/category.dart';
 import 'package:proyecto/src/models/address.dart';
 import 'package:proyecto/src/models/city.dart';
 import 'package:proyecto/src/models/equipos.dart';
@@ -12,6 +9,9 @@ import 'package:proyecto/src/utils/my_colors.dart';
 
 
 class EspCreatePage extends StatefulWidget {
+
+  const EspCreatePage({Key? key}) : super(key: key);
+
   @override
   _EspCreatePageState createState() => _EspCreatePageState ();
 }
@@ -19,18 +19,14 @@ class EspCreatePage extends StatefulWidget {
 
 
 class _EspCreatePageState extends State<EspCreatePage> {
-  EspCreateController _con = new EspCreateController();
+  final EspCreateController _con = EspCreateController();
 
   List<Address> address = [];
 
-
-
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);});
   }
 
@@ -39,21 +35,18 @@ class _EspCreatePageState extends State<EspCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nuevo Modulo Esp'),
+        title: const Text('Nuevo Modulo Esp'),
         backgroundColor: MyColors.primaryColor,
       ),
       body: ListView(
         children: [
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           _textFieldIdEsp(),
           _textFieldSsid(),
           _textFieldPassword(),
-
           _dropDownCities(_con.cities,_con),
           _dropDownEdificios(_con.edificios, _con),
           _dropDownEquipos(_con.equipos, _con),
-
-
         ],
 
       ),
@@ -63,13 +56,13 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _dropDownEquipos (  List<Equipos> equipos, EspCreateController _con ){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Material(
         elevation: 2.0,
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
@@ -78,8 +71,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
                     Icons.search_outlined,
                     color: MyColors.primaryColor,
                   ),
-                  SizedBox(width: 15),
-                  Text(
+                  const SizedBox(width: 15),
+                  const Text(
                     'Equipos',
                     style: TextStyle(
                       color: Colors.grey,
@@ -89,7 +82,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButton(
                   underline: Container(
                     alignment: Alignment.centerRight,
@@ -100,7 +93,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   ),
                   elevation: 3,
                   isExpanded: true,
-                  hint: Text(
+                  hint: const Text(
                     'Seleccionar Equipo',
                     style: TextStyle(
                       color: Colors.grey,
@@ -129,13 +122,13 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _dropDownEdificios (List  <Address> address, EspCreateController _con ){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Material(
         elevation: 2.0,
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
@@ -144,8 +137,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
                     Icons.search_outlined,
                     color: MyColors.primaryColor,
                   ),
-                  SizedBox(width: 15),
-                  Text(
+                  const SizedBox(width: 15),
+                  const Text(
                     'Edificios',
                     style: TextStyle(
                       color: Colors.grey,
@@ -155,7 +148,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: DropdownButton(
                   underline: Container(
                     alignment: Alignment.centerRight,
@@ -166,7 +159,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   ),
                   elevation: 3,
                   isExpanded: true,
-                  hint: Text(
+                  hint: const Text(
                     'Seleccionar Edificio',
                     style: TextStyle(
                       color: Colors.grey,
@@ -196,13 +189,13 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _dropDownCities(List<City> cities, EspCreateController _con ){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Material(
         elevation: 2.0,
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
@@ -211,8 +204,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
                     Icons.search,
                     color: MyColors.primaryColor,
                   ),
-                  SizedBox(width: 15),
-                  Text(
+                  const SizedBox(width: 15),
+                  const Text(
                     'Ciudades',
                     style: TextStyle(
                         color: Colors.grey,
@@ -222,7 +215,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child : DropdownButton(
                   underline: Container(
                     alignment: Alignment.centerRight,
@@ -233,7 +226,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
                   ),
                   elevation: 3,
                   isExpanded: true,
-                  hint: Text(
+                  hint: const Text(
                     'Selecionar Ciudad',
                     style: TextStyle(
                       color: Colors.grey,
@@ -263,23 +256,23 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   List<DropdownMenuItem<String>> _dropDownCitie(List<City> cities ){
     List<DropdownMenuItem<String>> list = [];
-    cities.forEach((city) {
+    for (var city in cities) {
       list.add(DropdownMenuItem(
         child: Text(city.name!),
         value: city.id,
       ));
-    });
+    }
     return list;
   }
 
   List<DropdownMenuItem<String>> _dropDownIItems(List<Address> address){
     List<DropdownMenuItem<String>> list = [];
-    address.forEach((address) {
+    for (var item in address) {
       list.add(DropdownMenuItem(
-        child: Text(address.name??'address'),
-        value: address.id,
+        child: Text(item.name ?? 'address'),
+        value: item.id,
       ));
-    });
+    }
     print(list);
     return list;
   }
@@ -287,12 +280,12 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   List<DropdownMenuItem<String>> _dropDownItems(  List<Equipos> equipos){
     List<DropdownMenuItem<String>> list = [];
-    equipos.forEach((equipos) {
+    for (var item in equipos) {
       list.add(DropdownMenuItem(
-        child: Text(equipos.name!),
-        value: equipos.id,
+        child: Text(item.name!),
+        value: item.id,
       ));
-    });
+    }
     print(list);
     return list;
   }
@@ -302,16 +295,16 @@ class _EspCreatePageState extends State<EspCreatePage> {
     return Container(
       height: 50,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: ElevatedButton(
         onPressed:_con.createEsp8266,
-        child: Text('Crear Modulo Esp'),
+        child: const Text('Crear Modulo Esp'),
         style: ElevatedButton.styleFrom(
             primary: MyColors.primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30)
             ),
-            padding: EdgeInsets.symmetric(vertical: 12)
+            padding: const EdgeInsets.symmetric(vertical: 12)
         ),
       ),
     );
@@ -320,8 +313,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _textFieldIdEsp() {
     return Container(
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)
@@ -336,7 +329,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
               color: MyColors.primaryColorDark
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(10),
           prefixIcon: Icon(
             Icons.account_tree_rounded,
             color: MyColors.primaryColor,),
@@ -347,8 +340,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _textFieldSsid() {
     return Container(
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)
@@ -363,7 +356,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
               color: MyColors.primaryColorDark
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(10),
           prefixIcon: Icon(
             Icons.wifi_sharp,
             color: MyColors.primaryColor,),
@@ -374,8 +367,8 @@ class _EspCreatePageState extends State<EspCreatePage> {
 
   Widget _textFieldPassword() {
     return Container(
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)
@@ -390,7 +383,7 @@ class _EspCreatePageState extends State<EspCreatePage> {
               color: MyColors.primaryColorDark
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(10),
           prefixIcon: Icon(
             Icons.lock,
             color: MyColors.primaryColor,),

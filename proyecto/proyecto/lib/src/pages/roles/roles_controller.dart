@@ -9,7 +9,7 @@ class RolesController{
   Function? refresh;
 
   User? user;
-  SharedPref sharedPref = new SharedPref();
+  SharedPref sharedPref =  SharedPref();
 
 
   Future? init(BuildContext context, Function refresh) async {

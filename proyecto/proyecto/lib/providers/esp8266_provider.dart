@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 
 
@@ -15,13 +13,13 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 
 class Esp8266Provider {
 
-  String _url = Environment.API_TESIS;
-  String _api = '/api/esp8266';
+  final String _url = Environment.API_TESIS;
+  final String _api = '/api/esp8266';
 
   BuildContext? context;
   User? sessionUser;
 
-  Future? init(BuildContext context, User? sessionUser){
+  Future<void> init(BuildContext context, User? sessionUser)async{
     this.context = context;
     this.sessionUser = sessionUser;
   }
@@ -61,7 +59,7 @@ class Esp8266Provider {
 
       if (res.statusCode == 401){
         Fluttertoast.showToast(msg: 'Sesion Expirada');
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
       }
 
       final data = json.decode(res.body);

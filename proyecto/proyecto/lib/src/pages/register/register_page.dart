@@ -4,12 +4,15 @@ import 'package:proyecto/src/pages/register/register_controller.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {
+
+  const RegisterPage({Key? key}) : super(key: key);
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  RegisterController _con = new RegisterController();
+  final RegisterController _con = RegisterController();
 
   @override
 
@@ -17,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     super.initState();
 
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);}
     );
   }
@@ -25,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: Stack(
             children: [
@@ -40,12 +43,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: _iconBack(_con)
               ),
               Container(
-                margin: EdgeInsets.only(top: 135),
+                margin: const EdgeInsets.only(top: 135),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       _imageRegister(_con),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       _textFieldEmail(_con),
                       _textFieldName(_con),
                       _textFieldLastName(_con),
@@ -108,7 +111,7 @@ Widget _notImg(){
 Widget _textFieldEmail(_con){
 
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30),
@@ -122,7 +125,7 @@ Widget _textFieldEmail(_con){
           color: MyColors.primaryColorDark,
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.email,
           color: MyColors.primaryColor),
@@ -133,7 +136,7 @@ Widget _textFieldEmail(_con){
 
 Widget _textFieldName(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),
@@ -146,7 +149,7 @@ Widget _textFieldName(_con) {
           color: MyColors.primaryColorDark,
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.person,
           color: MyColors.primaryColor,
@@ -159,7 +162,7 @@ Widget _textFieldName(_con) {
 
 Widget _textFieldLastName(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30)
@@ -172,7 +175,7 @@ Widget _textFieldLastName(_con) {
           color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
             Icons.person_outline,
         color: MyColors.primaryColor,),
@@ -181,34 +184,9 @@ Widget _textFieldLastName(_con) {
   );
 }
 
-Widget _textFieldPhone(_con) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-    decoration: BoxDecoration(
-        color: MyColors.primaryOpacityColor,
-        borderRadius: BorderRadius.circular(30)
-    ),
-    child: TextField(
-      controller: _con.phoneController,
-      keyboardType: TextInputType.phone,
-      decoration: InputDecoration(
-        hintText: 'Phone Number',
-        hintStyle: TextStyle(
-            color: MyColors.primaryColorDark
-        ),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
-        prefixIcon: Icon(
-          Icons.phone,
-          color: MyColors.primaryColor,),
-      ),
-    ),
-  );
-}
-
 Widget _textFieldPassword(_con) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),
@@ -222,7 +200,7 @@ Widget _textFieldPassword(_con) {
           color: MyColors.primaryColorDark
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.lock,
           color: MyColors.primaryColor,
@@ -234,7 +212,7 @@ Widget _textFieldPassword(_con) {
 
 Widget _textFieldCheckPassword(_con){
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
     decoration: BoxDecoration(
       color: MyColors.primaryOpacityColor,
       borderRadius: BorderRadius.circular(30),
@@ -248,7 +226,7 @@ Widget _textFieldCheckPassword(_con){
           color: MyColors.primaryColorDark,
         ),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         prefixIcon: Icon(
           Icons.lock_outline,
           color: MyColors.primaryColor,
@@ -259,10 +237,10 @@ Widget _textFieldCheckPassword(_con){
 }
 
 Widget _iconBack(_con) {
-  return Container(
+  return SizedBox(
     child: IconButton(
         onPressed: _con.back,
-        icon: Icon(Icons.arrow_back, color: Colors.white,)
+        icon: const Icon(Icons.arrow_back, color: Colors.white,)
     ),
   );
 }
@@ -270,16 +248,16 @@ Widget _iconBack(_con) {
 Widget _buttonRegister(_con) {
   return Container(
     width: double.infinity,
-    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: ElevatedButton(
           onPressed:_con.isEnable ? _con.register : null,
-          child: Text('Sign Up'),
+          child: const Text('Sign Up'),
           style: ElevatedButton.styleFrom(
               primary: MyColors.primaryColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)
           ),
-            padding: EdgeInsets.symmetric(vertical: 12)
+            padding: const EdgeInsets.symmetric(vertical: 12)
           ),
         ),
   );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class EspUpdatePage extends StatefulWidget {
+
+  const EspUpdatePage({Key? key}) : super(key: key);
+
   @override
   _EspUpdatePageState createState() => _EspUpdatePageState();
 }
@@ -13,7 +16,7 @@ class _EspUpdatePageState extends State<EspUpdatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Esp 00003'),
+        title: const Text('Esp 00003'),
       ),
       body: Center(
         child: Column(

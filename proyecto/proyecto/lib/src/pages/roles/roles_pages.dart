@@ -14,14 +14,14 @@ class RolesPages extends StatefulWidget {
 
 class _RolesPagesState extends State<RolesPages> {
 
-  RolesController _con = new RolesController();
+  final RolesController _con = RolesController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);
 
     });
@@ -31,7 +31,7 @@ class _RolesPagesState extends State<RolesPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seleccionar un rol'),
+        title: const Text('Seleccionar un rol'),
       ),
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.15),
@@ -55,26 +55,25 @@ class _RolesPagesState extends State<RolesPages> {
       },
       child: Column(
         children: [
-          Container(
-
+          SizedBox(
               height: 100,
               child: rol.image == null ? _notImg() : FadeInImage(
                 image: NetworkImage(rol.image!),
                 fit: BoxFit.contain,
                 fadeInDuration: const Duration(milliseconds: 50),
-                placeholder: AssetImage('assets/no-image.jpg'),
+                placeholder: const AssetImage('assets/no-image.jpg'),
               )
             ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           Text(
             rol.name ?? '',
-            style: TextStyle(
+            style: const TextStyle(
             fontSize: 16,
             color: Colors.black,
 
           ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
         ],
       ),
     );

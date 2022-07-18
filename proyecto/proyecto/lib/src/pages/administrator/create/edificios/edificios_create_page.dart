@@ -5,6 +5,9 @@ import 'package:proyecto/src/pages/administrator/create/edificios/edificios_crea
 import 'package:proyecto/src/utils/my_colors.dart';
 
 class EdificiosCreatePage extends StatefulWidget {
+
+  const EdificiosCreatePage({Key? key}) : super(key: key);
+
   @override
   _EdificiosCreatePageState createState() => _EdificiosCreatePageState();
 }
@@ -19,7 +22,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
     // TODO: implement initState
     _con = EdificiosCreateController();
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _con?.init(context, refresh);});
   }
 
@@ -27,12 +30,12 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nuevo Edificio'),
+        title: const Text('Nuevo Edificio'),
         backgroundColor: MyColors.primaryColor,
       ),
       body: ListView(
         children: [
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           _textFieldEdificio(),
           _textFieldAddress(),
           _textFieldNeighborhood(),
@@ -52,16 +55,16 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
     return Container(
       height: 50,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: ElevatedButton(
         onPressed:_con.createEdificio,
-        child: Text('Crear Edificio'),
+        child: const Text('Crear Edificio'),
         style: ElevatedButton.styleFrom(
             primary: MyColors.primaryColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30)
             ),
-            padding: EdgeInsets.symmetric(vertical: 12)
+            padding: const EdgeInsets.symmetric(vertical: 12)
         ),
       ),
     );
@@ -70,7 +73,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
 
   Widget _textFieldEdificio() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: TextField(
         controller: _con?.nameController,
           decoration: InputDecoration(
@@ -84,7 +87,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
 
   Widget _textFieldAddress() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: TextField(
           controller: _con?.addressController,
           decoration: InputDecoration(
@@ -98,7 +101,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
 
   Widget _textFieldNeighborhood() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: TextField(
           controller: _con?.neighborhoodController,
           decoration: InputDecoration(
@@ -112,13 +115,13 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
 
   Widget _dropDownCities(List<City> cities, _con ){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Material(
         elevation: 2.0,
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
@@ -127,8 +130,8 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
                       Icons.search,
                       color: MyColors.primaryColor,
                     ),
-                  SizedBox(width: 15),
-                  Text(
+                  const SizedBox(width: 15),
+                  const Text(
                     'Ciudades',
                     style: TextStyle(
                       color: Colors.grey,
@@ -138,7 +141,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child : DropdownButton(
                   underline: Container(
                     alignment: Alignment.centerRight,
@@ -149,7 +152,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
                   ),
                   elevation: 3,
                   isExpanded: true,
-                  hint: Text(
+                  hint: const Text(
                     'Selecionar Ciudad',
                     style: TextStyle(
                       color: Colors.grey,
@@ -175,12 +178,12 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
 
   List<DropdownMenuItem<String>> _dropDownCitie(List<City> cities ){
     List<DropdownMenuItem<String>> list = [];
-    cities.forEach((city) {
+    for (var city in cities) {
       list.add(DropdownMenuItem(
           child: Text(city.name!),
         value: city.id,
       ));
-    });
+    }
     return list;
   }
 
@@ -192,7 +195,7 @@ class _EdificiosCreatePageState extends State<EdificiosCreatePage> {
       child: AbsorbPointer(
         absorbing: true,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: TextField(
               controller: _con?.refPointController,
               autofocus: false,

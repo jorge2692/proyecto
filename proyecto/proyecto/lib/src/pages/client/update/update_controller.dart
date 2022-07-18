@@ -16,10 +16,10 @@ import 'package:sn_progress_dialog/progress_dialog.dart';
 class UpdateController{
 
   BuildContext? context;
-  TextEditingController nameController      = new TextEditingController();
-  TextEditingController lastNameController  = new TextEditingController();
+  TextEditingController nameController      = TextEditingController();
+  TextEditingController lastNameController  = TextEditingController();
 
-  UsersProvider usersProvider =  new UsersProvider();
+  UsersProvider usersProvider =  UsersProvider();
 
   PickedFile? pickedFile;
   File? imageFile;
@@ -30,7 +30,7 @@ class UpdateController{
 
   bool isEnable = true;
   User? user;
-  SharedPref _sharedPref = new SharedPref();
+  final SharedPref _sharedPref = SharedPref();
 
   Future? init(BuildContext context, Function refresh) async{
     this.context = context;
@@ -66,7 +66,7 @@ class UpdateController{
 
     isEnable = false;
 
-    User myUser = new User(
+    User myUser = User(
       id      : user?.id,
       name    : name,
       lastname: lastName,
@@ -117,18 +117,18 @@ class UpdateController{
     Widget galleryButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.gallery);
-        }, child: Text('Galeria')
+        }, child: const Text('Galeria')
     );
 
 
     Widget cameraButton = ElevatedButton(
         onPressed: () {
           selectImage(ImageSource.camera);
-        }, child: Text('Camera')
+        }, child: const Text('Camera')
     );
 
     AlertDialog alertDialog = AlertDialog(
-      title: Text('Selecciona una imagen'),
+      title: const Text('Selecciona una imagen'),
       actions: [
         galleryButton,
         cameraButton,

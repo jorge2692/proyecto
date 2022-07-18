@@ -12,21 +12,21 @@ import 'package:proyecto/src/utils/shared_pref.dart';
 
 class UsersProvider{
 
-  String _url = Environment.API_TESIS;
-  String _api = '/api/users';
+  final String _url = Environment.API_TESIS;
+  final String _api = '/api/users';
 
   BuildContext? context;
   String? token;
   User? sessionUser;
 
-  Future? init(BuildContext context, {User? sessionUser}) {
+  Future<void> init(BuildContext context, {User? sessionUser}) async{
 
     this.context = context;
     this.token = token;
     this.sessionUser = sessionUser;
   }
 
-  Future <User> getById(String id)async{
+  Future<User> getById(String id)async{
     try{
       Uri url = Uri.http(_url, '$_api/findById/$id');
       Map<String, String> headers = {
@@ -38,8 +38,7 @@ class UsersProvider{
 
         Fluttertoast.showToast(msg: 'Tu sesion expiro');
 
-        new SharedPref().logout(context!, sessionUser!.id!);
-
+        SharedPref().logout(context!, sessionUser!.id!);
 
       }
       final data = json.decode(res.body);
@@ -49,7 +48,7 @@ class UsersProvider{
     }
     catch(e){
       print('Error: $e');
-      return null!;
+      return User();
     }
   }
 
@@ -58,16 +57,14 @@ class UsersProvider{
       Uri url = Uri.http(_url, '$_api/create');
       final request = http.MultipartRequest('POST', url);
 
-      if(image != null){
-        request.files.add(http.MultipartFile(
+      request.files.add(http.MultipartFile(
 
-          'image',
-          http.ByteStream(image.openRead().cast()),
-          await image.length(),
-          filename:  basename(image.path)
-        )
-        );
-      }
+        'image',
+        http.ByteStream(image.openRead().cast()),
+        await image.length(),
+        filename:  basename(image.path)
+      )
+      );
 
       request.fields['user'] = json.encode(user);
       final response =  await request.send();
@@ -85,16 +82,14 @@ class UsersProvider{
       final request = http.MultipartRequest('PUT', url);
       request.headers['Authorization'] = sessionUser!.sessionToken!;
 
-      if(image != null){
-        request.files.add(http.MultipartFile(
+      request.files.add(http.MultipartFile(
 
-            'image',
-            http.ByteStream(image.openRead().cast()),
-            await image.length(),
-            filename:  basename(image.path)
-        )
-        );
-      }
+          'image',
+          http.ByteStream(image.openRead().cast()),
+          await image.length(),
+          filename:  basename(image.path)
+      )
+      );
 
       request.fields['user'] = json.encode(user);
       final response =  await request.send();
@@ -102,7 +97,7 @@ class UsersProvider{
 
         Fluttertoast.showToast(msg: 'Tu sesion expiro');
 
-        new SharedPref().logout(context!, sessionUser!.id!);
+        SharedPref().logout(context!, sessionUser!.id!);
 
 
       }
@@ -110,7 +105,7 @@ class UsersProvider{
 
     }catch(e){
       print('Error: $e');
-      return null!;
+      return null;
     }
   }
 
@@ -180,7 +175,7 @@ class UsersProvider{
     }
     catch (e) {
       print('Error: $e');
-      return null!;
+      return null;
     }
   }
 

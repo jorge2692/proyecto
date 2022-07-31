@@ -179,7 +179,27 @@ class UsersProvider{
     }
   }
 
+  Future<ResponseApi?> updateFcm(String idUser, String fcmToken) async {
+    try {
+      Uri url = Uri.parse(_url + '$_api/fcm');
+      String bodyParams = json.encode({
+        'id' : idUser,
+        'fcm' : fcmToken
+      });
+      Map<String, String> headers = {
+        'Content-type': 'application/json'
+      };
 
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    }
+    catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
 
 }
 

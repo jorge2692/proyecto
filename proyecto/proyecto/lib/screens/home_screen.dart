@@ -35,19 +35,12 @@ class _HomeScreen extends State<HomeScreen> {
       length: _con.categories.length,
       child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(150),
+            preferredSize: const Size.fromHeight(kToolbarHeight * 2),
             child: AppBar(
               centerTitle: true,
               title: const Text('Lavanti'),
               backgroundColor: MyColors.primaryColor,
               elevation: 0,
-              flexibleSpace: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  _textFieldSearch(),
-
-                ],
-              ),
               bottom: TabBar(
                 indicatorColor: MyColors.primaryColorDark,
                 labelColor: Colors.black,
@@ -66,7 +59,6 @@ class _HomeScreen extends State<HomeScreen> {
           body: TabBarView(
 
             children: _con.categories.map((Category category){
-              print(":::: ${category.id }");
               return FutureBuilder(
                 future: _con.getEquipos(category.id!),
               builder: (context, AsyncSnapshot<List<Equipos>> snapshot){
@@ -163,8 +155,6 @@ class _HomeScreen extends State<HomeScreen> {
 
   Widget _drawer(_con){
 
-    print(_con.user?.image);
-
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -243,40 +233,6 @@ class _HomeScreen extends State<HomeScreen> {
       placeholder: AssetImage('assets/iconavatar.jpeg'),
     );
   }
-
-  Widget _textFieldSearch(){
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Buscar',
-          suffixIcon: const Icon(
-            Icons.search_rounded,
-            color: Colors.grey,),
-            hintStyle: const TextStyle(
-            fontSize: 17,
-              color: Colors.grey
-        ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: const BorderSide(
-              color: Colors.grey
-            )
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: const BorderSide(
-              color: Colors.grey
-          )
-      ),
-          contentPadding: const EdgeInsets.all(12)
-        ),
-      )
-
-    );
-  }
-
 
   void refresh(){
     setState(() {});

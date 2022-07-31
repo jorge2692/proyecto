@@ -1,8 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:proyecto/providers/categories_provider.dart';
 import 'package:proyecto/providers/cities_provider.dart';
 import 'package:proyecto/providers/equipos_provider.dart';
+import 'package:proyecto/providers/users_provider.dart';
 import 'package:proyecto/src/models/category.dart';
 import 'package:proyecto/src/models/equipos.dart';
 import 'package:proyecto/src/models/user.dart';
@@ -19,6 +21,7 @@ class CerrarSesion{
   final CategoriesProvider _categoriesProvider = CategoriesProvider();
   final EquiposProvider _equiposProvider = EquiposProvider();
   final CitiesProvider _citiesProvider = CitiesProvider();
+  final UsersProvider _usersProvider = UsersProvider();
   List<Category> categories = [];
 
   Future? init(BuildContext context, Function refresh) async{
@@ -29,9 +32,18 @@ class CerrarSesion{
     _categoriesProvider.init(context, user);
     _equiposProvider.init(context, user);
     _citiesProvider.init(context, user);
+    _usersProvider.init(context);
     getCategories();
     refresh();
 
+    getFcm(user);
+
+  }
+
+  Future<void> getFcm(User? user)async{
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print(fcmToken);
+    _usersProvider.updateFcm(user?.id ?? '',fcmToken ?? '');
   }
 
   Future<List<Equipos>> getEquipos(String idCategory) async{

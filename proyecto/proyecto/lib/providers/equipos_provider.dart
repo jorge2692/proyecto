@@ -28,7 +28,7 @@ class EquiposProvider {
   Future<List<Equipos>> getByCategory(String idCategory) async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/findByCategory/$idCategory');
+      Uri url = Uri.parse(_url+ '$_api/findByCategory/$idCategory');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!
@@ -54,7 +54,7 @@ class EquiposProvider {
 
   Future<Stream?> create(Equipos equipos, List<File> images) async {
     try{
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       final request = http.MultipartRequest('POST', url);
       request.headers['Authorization'] = sessionUser!.sessionToken!;
 
@@ -84,7 +84,7 @@ class EquiposProvider {
   Future<List<Equipos>> getByBuilding(String idBuilding) async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/findByCategory/$idBuilding');
+      Uri url = Uri.parse(_url+ '$_api/findByCategory/$idBuilding');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!

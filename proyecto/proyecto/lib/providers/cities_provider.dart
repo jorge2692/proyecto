@@ -25,7 +25,7 @@ class CitiesProvider {
   Future<List<City>> getAll() async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/getAll');
+      Uri url = Uri.parse(_url+ '$_api/getAll');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!
@@ -54,7 +54,7 @@ class CitiesProvider {
 
     try{
 
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       String bodyParams = json.encode(city);
       Map<String, String> headers = {
         'Content-type': 'application/json',

@@ -25,7 +25,7 @@ class CategoriesProvider {
   Future<List<Category>> getAll() async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/getAll');
+      Uri url = Uri.parse(_url+ '$_api/getAll');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!
@@ -57,7 +57,7 @@ class CategoriesProvider {
 
     try{
 
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       String bodyParams = json.encode(category);
       Map<String, String> headers = {
         'Content-type': 'application/json',

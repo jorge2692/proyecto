@@ -27,7 +27,7 @@ class Esp8266Provider {
 
   // Future<Stream?> create(Esp8266 esp8266) async {
   //   try{
-  //     Uri url = Uri.http(_url, '$_api/create');
+  //     Uri url = Uri.parse(_url, '$_api/create');
   //     final request = http.MultipartRequest('POST', url);
   //     request.headers['Authorization'] = sessionUser!.sessionToken!;
   //
@@ -49,7 +49,7 @@ class Esp8266Provider {
 
     try{
 
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       String bodyParams = json.encode(esp8266);
       Map<String, String> headers = {
         'Content-type': 'application/json',
@@ -77,7 +77,7 @@ class Esp8266Provider {
 Future<Esp8266?> getByMachine(String idMachine) async{
   try {
 
-    Uri url = Uri.http(_url, '$_api/findByMachine/$idMachine');
+    Uri url = Uri.parse(_url+ '$_api/findByMachine/$idMachine');
     Map<String, String> headers = {
       'Content-type': 'application/json',
       // 'Authorization': sessionUser?.sessionToken??''
@@ -105,7 +105,7 @@ Future<Esp8266?> getByMachine(String idMachine) async{
   Future<ResponseApi?> update(Esp8266 esp8266) async {
 
     try{
-      Uri url = Uri.http(_url, '$_api/update');
+      Uri url = Uri.parse(_url+ '$_api/update');
       final DateTime now = DateTime.now();
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
       final String formatted = formatter.format(now);

@@ -25,7 +25,7 @@ class AddressProvider {
   Future<List<Address>> getAll() async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/getAll');
+      Uri url = Uri.parse(_url + '$_api/getAll');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!
@@ -56,7 +56,7 @@ class AddressProvider {
 
     try{
 
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       String bodyParams = json.encode(address);
       Map<String, String> headers = {
         'Content-type': 'application/json',
@@ -83,7 +83,7 @@ class AddressProvider {
   Future<List<Address>> findByBuild(String idCiudad) async{
     try {
 
-      Uri url = Uri.http(_url, '$_api/findByCity/$idCiudad');
+      Uri url = Uri.parse(_url+ '$_api/findByCity/$idCiudad');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!

@@ -28,7 +28,7 @@ class UsersProvider{
 
   Future<User> getById(String id)async{
     try{
-      Uri url = Uri.http(_url, '$_api/findById/$id');
+      Uri url = Uri.parse(_url+ '$_api/findById/$id');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser!.sessionToken!,
@@ -54,7 +54,7 @@ class UsersProvider{
 
   Future<Stream?> createWithImage(User user, File image) async {
     try{
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       final request = http.MultipartRequest('POST', url);
 
       request.files.add(http.MultipartFile(
@@ -78,7 +78,7 @@ class UsersProvider{
 
   Future<Stream?> update(User user, File image) async {
     try{
-      Uri url = Uri.http(_url, '$_api/update');
+      Uri url = Uri.parse(_url+ '$_api/update');
       final request = http.MultipartRequest('PUT', url);
       request.headers['Authorization'] = sessionUser!.sessionToken!;
 
@@ -115,7 +115,7 @@ class UsersProvider{
 
     try{
 
-      Uri url = Uri.http(_url, '$_api/create');
+      Uri url = Uri.parse(_url+ '$_api/create');
       String bodyParams = json.encode(user);
       Map<String, String> headers = {
         'Content-type': 'application/json'
@@ -137,7 +137,7 @@ class UsersProvider{
   Future<ResponseApi?> login(String email, String pass)async {
     try{
 
-      Uri url = Uri.http(_url, '$_api/login');
+      Uri url = Uri.parse(_url+ '$_api/login');
       String bodyParams = json.encode({
         'email': email,
         'password': pass
@@ -160,7 +160,7 @@ class UsersProvider{
 
   Future<ResponseApi?> logout(String idUser) async {
     try {
-      Uri url = Uri.http(_url, '$_api/logout');
+      Uri url = Uri.parse(_url+ '$_api/logout');
       String bodyParams = json.encode({
         'id' : idUser
       });

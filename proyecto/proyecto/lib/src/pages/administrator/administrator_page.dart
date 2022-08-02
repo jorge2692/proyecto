@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto/features/errors_list/bloc/errors_list_bloc.dart';
 import 'package:proyecto/src/utils/my_colors.dart';
 import 'package:proyecto/widgets/cerrar_sesion.dart';
 
@@ -33,6 +35,43 @@ class _AdministratorPage extends State<AdministratorPage> {
         title: const Text('Lavanti'),
         backgroundColor: MyColors.primaryColor,
         elevation: 0,
+      ),
+      body: SafeArea(
+        child: BlocProvider<ErrorsListBloc>(
+            create: (context) => ErrorsListBloc(),
+          child: BlocBuilder<ErrorsListBloc,ErrorListState>(
+            builder: (context,state){
+              if(state is LoadingErrors){
+                return const Center(child: CircularProgressIndicator());
+              }
+              if(state is DataListErrors){
+                return Column(
+                  children: [
+                    Text('Errores'),
+                    Expanded(child:
+                    ListView.builder(
+                        itemCount: state.data.length,
+                        itemBuilder: (context,index){
+                          var error = state.data[index];
+                          return Card(
+                            child: ListTile(
+                              title: Text(error.machineName ?? ''),
+                              subtitle: Text(
+                                'Voltaje ${error.voltage} - Corriente ${error.amp} - Alerta ${error.alert}',
+                                maxLines: 3,
+                              ),
+                              trailing: Text('${error.createdAt?.year}/${error.createdAt?.month}/${error.createdAt?.day}  ${error.createdAt?.hour}:${error.createdAt?.minute}:${error.createdAt?.second}'),
+                            ),
+                          );
+                    }),
+                    )
+                  ],
+                );
+              }
+              return const SizedBox();
+            },
+          ),
+        ),
       ),
       drawer: _drawer(_con),
     );
